@@ -24,6 +24,12 @@ const keys = {
 module.exports = {
   abiExporter: {
     path: './abi',
+    only: [
+      'ManyToOneImplementationHolder',
+      'DelegateCallProxyManyToOne',
+      'DelegateCallProxyOneToOne',
+      'DelegateCallProxyManager'
+    ],
     clear: true,
   },
   etherscan: {
