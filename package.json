@@ -1,7 +1,11 @@
 {
   "name": "@indexed-finance/proxies",
-  "version": "1.0.0",
-  "description": "",
+  "private": false,
+  "version": "1.0.1",
+  "description": "Solidity delegatecall proxy contracts.",
+  "repository": {
+    "url": "https://github.com/indexed-finance/proxies"
+  },
   "main": "index.js",
   "scripts": {
     "build": "buidler compile",
@@ -9,7 +13,7 @@
     "test": "buidler test --network buidlerevm ./test/test-proxy.spec.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dillon Kellar",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
     "@ethersproject/providers": "^5.0.9",
