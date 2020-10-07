@@ -1,7 +1,7 @@
 {
   "name": "@indexed-finance/proxies",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Solidity delegatecall proxy contracts.",
   "repository": {
     "url": "https://github.com/indexed-finance/proxies"
@@ -15,12 +15,14 @@
   "keywords": [],
   "author": "Dillon Kellar",
   "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.2.0"
+  },
   "devDependencies": {
     "@ethersproject/providers": "^5.0.9",
     "@nomiclabs/buidler": "^1.4.3",
     "@nomiclabs/buidler-ethers": "^2.0.0",
     "@nomiclabs/buidler-waffle": "^2.0.0",
-    "@openzeppelin/contracts": "^3.2.0",
     "buidler-abi-exporter": "^1.0.1",
     "buidler-deploy": "^0.6.0-beta.16",
     "buidler-ethers-v5": "^0.2.2",
