@@ -1,11 +1,24 @@
 # @indexed-finance/proxies
 
+Smart contracts for upgradeable proxies.
+
 ## Install
-`npm install --save @indexed-finance/proxies`
+
+```
+npm install --save @indexed-finance/proxies
+```
 
 ## Test
 
-`npm run test`
+```
+npm run test
+```
+
+## Gas Report
+```
+npm run node
+npm run benchmark
+```
 
 ## Description
 
