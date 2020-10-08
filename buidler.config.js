@@ -10,6 +10,7 @@ const { randomBytes } = require('crypto');
 usePlugin("buidler-ethers-v5");
 usePlugin("buidler-deploy");
 usePlugin('buidler-abi-exporter');
+usePlugin('buidler-gas-reporter');
 usePlugin("solidity-coverage");
 
 const keys = {
@@ -34,8 +35,9 @@ module.exports = {
   gasReporter: {
     currency: "USD",
     showTimeSpent: true,
-    enabled: true,
+    enabled: process.env.REPORT_GAS,
     currency: "USD",
+    onlyCalledMethods: false
   },
   namedAccounts: {
     deployer: {
@@ -50,7 +52,7 @@ module.exports = {
     local: {
       url: url.format({
         protocol: "http:",
-        port: 8545,
+        port: 8546,
         hostname: "localhost",
       }),
     },
