@@ -7,8 +7,6 @@ const { InfuraProvider } = require('@ethersproject/providers');
 const { fromPrivateKey } = require('ethereumjs-wallet');
 const { randomBytes } = require('crypto');
 
-const { types, internalTask } = require("@nomiclabs/buidler/config")
-
 usePlugin("buidler-ethers-v5");
 usePlugin("buidler-deploy");
 usePlugin('buidler-abi-exporter');
@@ -32,12 +30,6 @@ module.exports = {
   etherscan: {
     url: "https://api.etherscan.io/api",
     apiKey: process.env.ETHERSCAN_API_KEY,
-  },
-  external: {
-    artifacts: [
-      "node_modules/@uniswap/v2-core/build",
-      "node_modules/@uniswap/v2-periphery/build"
-    ],
   },
   gasReporter: {
     currency: "USD",
