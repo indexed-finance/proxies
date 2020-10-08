@@ -1,16 +1,22 @@
 {
   "name": "@indexed-finance/proxies",
-  "private": false,
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "Solidity delegatecall proxy contracts.",
   "repository": {
     "url": "https://github.com/indexed-finance/proxies"
   },
-  "main": "index.js",
+  "files": [
+    "contracts",
+    "artifacts",
+    "deployments"
+  ],
   "scripts": {
     "build": "buidler compile",
+    "coverage": "buidler coverage --network coverage --solcoverjs ./.solcover.js",
     "deploy:rinkeby": "buidler --network rinkeby deploy",
-    "test": "buidler test --network buidlerevm ./test/test-proxy.spec.js"
+    "test": "buidler test ./test/test-proxy.spec.js",
+    "node": "npx buidler node --port 8546",
+    "benchmark": "cross-env REPORT_GAS=true npx buidler test --network localhost ./test/benchmark.spec.js"
   },
   "keywords": [],
   "author": "Dillon Kellar",
@@ -27,7 +33,9 @@
     "buidler-deploy": "^0.6.0-beta.16",
     "buidler-ethers-v5": "^0.2.2",
     "buidler-gas-reporter": "^0.1.3",
+    "chai": "^4.2.0",
     "chalk": "^4.1.0",
+    "cross-env": "^7.0.2",
     "decimal.js": "^10.2.0",
     "dotenv": "^8.2.0",
     "ethereum-waffle": "^3.0.2",
