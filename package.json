@@ -1,6 +1,6 @@
 {
   "name": "@indexed-finance/proxies",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Solidity delegatecall proxy contracts.",
   "repository": {
     "url": "https://github.com/indexed-finance/proxies"
@@ -15,8 +15,8 @@
     "coverage": "buidler coverage --network coverage --solcoverjs ./.solcover.js",
     "deploy:rinkeby": "buidler --network rinkeby deploy",
     "test": "buidler test ./test/test-proxy.spec.js",
-    "node": "npx buidler node --port 8546",
-    "benchmark": "cross-env REPORT_GAS=true npx buidler test --network localhost ./test/benchmark.spec.js"
+    "node": "npx buidler node --port 8546 --verbose",
+    "benchmark": "cross-env REPORT_GAS=true npx buidler test ./test/benchmark.spec.js"
   },
   "keywords": [],
   "author": "Dillon Kellar",
@@ -46,6 +46,7 @@
     "prettier-plugin-solidity": "^1.0.0-alpha.55",
     "solidity-coverage": "^0.7.10",
     "solium": "^1.2.5",
-    "solium-plugin-security": "^0.1.1"
+    "solium-plugin-security": "^0.1.1",
+    "web3-utils": "^1.3.0"
   }
 }
