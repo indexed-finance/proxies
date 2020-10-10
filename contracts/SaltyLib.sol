@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.6.0;
-import "./ManyToOneImplementationHolder.sol";
-import {
-  DelegateCallProxyManyToOne
-} from "./DelegateCallProxyManyToOne.sol";
-import {
-  DelegateCallProxyOneToOne
-} from "./DelegateCallProxyOneToOne.sol";
+
+/* ---  External Libraries  --- */
 import { Create2 } from "@openzeppelin/contracts/utils/Create2.sol";
+
+/* ---  Proxy Contracts  --- */
+import "./ManyToOneImplementationHolder.sol";
+import { DelegateCallProxyManyToOne } from "./DelegateCallProxyManyToOne.sol";
+import { DelegateCallProxyOneToOne } from "./DelegateCallProxyOneToOne.sol";
 
 
 library SaltyLib {
