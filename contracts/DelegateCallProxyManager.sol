@@ -1,15 +1,21 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.6.0;
 
+/* ---  External Libraries  --- */
 import { Create2 } from "@openzeppelin/contracts/utils/Create2.sol";
 import { Address } from "@openzeppelin/contracts/utils/Address.sol";
 
+/* ---  Proxy Contracts  --- */
 import "./ManyToOneImplementationHolder.sol";
 import { DelegateCallProxyManyToOne } from "./DelegateCallProxyManyToOne.sol";
 import { DelegateCallProxyOneToOne } from "./DelegateCallProxyOneToOne.sol";
 
-import "./Owned.sol";
+/* ---  Internal Libraries  --- */
 import { SaltyLib as Salty } from "./SaltyLib.sol";
+
+/* ---  Inheritance  --- */
+import "./Owned.sol";
+import "./interfaces/IDelegateCallProxyManager.sol";
 
 
 /**
@@ -25,7 +31,7 @@ import { SaltyLib as Salty } from "./SaltyLib.sol";
  * A many-to-one proxy is a single upgradeable implementation address that may be
  * used by many proxy contracts.
  */
-contract DelegateCallProxyManager is Owned {
+contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
 /* ---  Constants  --- */
   bytes32 internal constant ONE_TO_ONE_CODEHASH
   = keccak256(type(DelegateCallProxyOneToOne).creationCode);
@@ -99,7 +105,7 @@ contract DelegateCallProxyManager is Owned {
   /**
    * @dev Allows `deployer` to deploy many-to-one proxies.
    */
-  function approveDeployer(address deployer) external _owner_ {
+  function approveDeployer(address deployer) external override _owner_ {
     _approvedDeployers[deployer] = true;
     emit DeploymentApprovalGranted(deployer);
   }
@@ -107,7 +113,7 @@ contract DelegateCallProxyManager is Owned {
   /**
    * @dev Prevents `deployer` from deploying many-to-one proxies.
    */
-  function revokeDeployerApproval(address deployer) external _owner_ {
+  function revokeDeployerApproval(address deployer) external override _owner_ {
     _approvedDeployers[deployer] = false;
     emit DeploymentApprovalRevoked(deployer);
   }
@@ -133,6 +139,7 @@ contract DelegateCallProxyManager is Owned {
     address implementation
   )
     external
+    override
     _owner_
   {
     // Deploy the implementation holder contract with the implementation
@@ -168,6 +175,7 @@ contract DelegateCallProxyManager is Owned {
     address implementation
   )
     external
+    override
     _owner_
   {
     // Read the implementation holder address from storage.
@@ -202,6 +210,7 @@ contract DelegateCallProxyManager is Owned {
     address implementation
   )
     external
+    override
     _owner_
   {
     // Set the implementation address
@@ -228,6 +237,7 @@ contract DelegateCallProxyManager is Owned {
     address implementation
   )
     external
+    override
     _owner_
     returns(address proxyAddress)
   {
@@ -259,6 +269,7 @@ contract DelegateCallProxyManager is Owned {
    */
   function deployProxyManyToOne(bytes32 implementationID, bytes32 suppliedSalt)
     external
+    override
     _admin_
     returns(address proxyAddress)
   {
@@ -299,7 +310,7 @@ contract DelegateCallProxyManager is Owned {
 
 /* ---  Queries  --- */
 
-  function isApprovedDeployer(address deployer) external view returns (bool) {
+  function isApprovedDeployer(address deployer) external override view returns (bool) {
     return _approvedDeployers[deployer];
   }
 
@@ -312,6 +323,7 @@ contract DelegateCallProxyManager is Owned {
    */
   function getImplementationHolder()
     external
+    override
     view
     returns (address)
   {
@@ -326,6 +338,7 @@ contract DelegateCallProxyManager is Owned {
     bytes32 implementationID
   )
     external
+    override
     view
     returns (address)
   {
@@ -344,6 +357,7 @@ contract DelegateCallProxyManager is Owned {
     bytes32 suppliedSalt
   )
     external
+    override
     view
     returns (address)
   {
@@ -366,6 +380,7 @@ contract DelegateCallProxyManager is Owned {
     bytes32 suppliedSalt
   )
     external
+    override
     view
     returns (address)
   {
@@ -386,6 +401,7 @@ contract DelegateCallProxyManager is Owned {
   */
   function computeHolderAddressManyToOne(bytes32 implementationID)
     public
+    override
     view
     returns (address)
   {
