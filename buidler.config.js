@@ -24,7 +24,7 @@ module.exports = {
   abiExporter: {
     path: './abi',
     only: [
-      'DelegateCallProxyManager'
+      'IDelegateCallProxyManager'
     ],
     clear: true,
   },
