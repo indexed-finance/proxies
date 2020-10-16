@@ -7,7 +7,9 @@
   },
   "files": [
     "contracts",
-    "artifacts"
+    "artifacts",
+    "deployments/rinkeby",
+    "deployments/mainnet"
   ],
   "scripts": {
     "build": "buidler compile",
