@@ -36,8 +36,8 @@ describe('Mock Proxy Factory', async () => {
     it('Proxy forwards calls to implementation address', async () => {
       await proxy.incrementValue();
       let val = await proxy.getValue();
-      expect(val).to.eq('1');
-      expect(await implementation1.getValue()).to.eq('0')
+      expect(val.eq(1)).to.be.true;
+      expect((await implementation1.getValue()).eq(0)).to.be.true;
     });
 
     it('Updates the implementation address', async () => {
@@ -51,8 +51,8 @@ describe('Mock Proxy Factory', async () => {
     it('Proxy uses the new implementation', async () => {
       await proxy.incrementValue();
       let val = await proxy.getValue();
-      expect(val).to.eq('3');
-      expect(await implementation2.getValue()).to.eq('0')
+      expect(val.eq(3)).to.be.true;
+      expect((await implementation2.getValue()).eq(0)).to.be.true;
     });
   });
 
@@ -87,10 +87,10 @@ describe('Mock Proxy Factory', async () => {
 
     it('Proxies forward calls to implementation address', async () => {
       await proxy1.incrementValue();
-      expect(await proxy1.getValue()).to.eq('1');
+      expect((await proxy1.getValue()).eq(1)).to.be.true;
       await proxy2.incrementValue();
-      expect(await proxy2.getValue()).to.eq('1');
-      expect(await implementation1.getValue()).to.eq('0');
+      expect((await proxy2.getValue()).eq(1)).to.be.true;
+      expect((await implementation1.getValue()).eq(0)).to.be.true;
     });
 
     it('Updates the implementation address', async () => {
@@ -103,10 +103,10 @@ describe('Mock Proxy Factory', async () => {
 
     it('Proxies forward calls to new implementation address', async () => {
       await proxy1.incrementValue();
-      expect(toBN(await proxy1.getValue()).toNumber()).to.eq('3');
+      expect((await proxy1.getValue()).eq(3)).to.be.true;
       await proxy2.incrementValue();
-      expect(await proxy2.getValue()).to.eq('3');
-      expect(await implementation2.getValue()).to.eq('0');
+      expect((await proxy2.getValue()).eq(3)).to.be.true;
+      expect((await implementation2.getValue()).eq(0)).to.be.true;
     });
 
     describe('Approved deployers', async () => {
