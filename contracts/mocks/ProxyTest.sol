@@ -284,7 +284,65 @@ contract ProxyTest is TestOrder {
     console.log("    ✓ Proxy forwards calls to upgraded implementation.");
   }
 
-  function test_setOwner() external testIndex(9) {
+  function test_lockImplementationOneToOne() external testIndex(9) {
+    console.log("🔓 One-to-one implementation locked");
+    bool isLocked = manager.isImplementationLocked(proxyAddress1T1);
+    require(!isLocked, "Error: Expected isImplementationLocked to return false.");
+    manager.lockImplementationOneToOne(proxyAddress1T1);
+    isLocked = manager.isImplementationLocked(proxyAddress1T1);
+    require(isLocked, "Error: Expected isImplementationLocked to return true.");
+    console.log("    ✓ Locks one-to-one proxy implementation.");
+
+    try manager.setImplementationAddressOneToOne(proxyAddress1T1, address(0)) {
+      revert("Expected error.");
+    } catch Error(string memory errorMsg) {
+      require(
+        keccak256(abi.encodePacked(errorMsg)) == keccak256("ERR_IMPLEMENTATION_LOCKED"),
+        "Error: Expected ERR_IMPLEMENTATION_LOCKED error message."
+      );
+    }
+    console.log("    ✓ Fails to upgrade locked implementation.");
+  }
+
+  function test_lockImplementationManyToOne() external testIndex(10) {
+    console.log("🔓 Many-to-one implementation locked");
+    bool isLocked = manager.isImplementationLocked(TEST_IMPLEMENTATION_ID);
+    require(!isLocked, "Error: Expected isImplementationLocked to return false.");
+    manager.lockImplementationManyToOne(TEST_IMPLEMENTATION_ID);
+    isLocked = manager.isImplementationLocked(TEST_IMPLEMENTATION_ID);
+    require(isLocked, "Error: Expected isImplementationLocked to return true.");
+    console.log("    ✓ Locks many-to-one proxy implementation.");
+
+    try manager.setImplementationAddressManyToOne(TEST_IMPLEMENTATION_ID, address(0)) {
+      revert("Expected error.");
+    } catch Error(string memory errorMsg) {
+      require(
+        keccak256(abi.encodePacked(errorMsg)) == keccak256("ERR_IMPLEMENTATION_LOCKED"),
+        "Error: Expected ERR_IMPLEMENTATION_LOCKED error message."
+      );
+    }
+    console.log("    ✓ Fails to upgrade locked implementation.");
+    try manager.lockImplementationManyToOne(bytes32(0)) {
+      revert("Expected error.");
+    } catch Error(string memory errorMsg) {
+      require(
+        keccak256(abi.encodePacked(errorMsg)) == keccak256("ERR_IMPLEMENTATION_ID"),
+        "Error: Expected ERR_IMPLEMENTATION_ID error message."
+      );
+    }
+    console.log("    ✓ Fails to lock unrecognized implementation.");
+    try manager.isImplementationLocked(bytes32(0)) {
+      revert("Expected error.");
+    } catch Error(string memory errorMsg) {
+      require(
+        keccak256(abi.encodePacked(errorMsg)) == keccak256("ERR_IMPLEMENTATION_ID"),
+        "Error: Expected ERR_IMPLEMENTATION_ID error message."
+      );
+    }
+    console.log("    ✓ Fails to query unrecognized implementation.");
+  }
+
+  function test_setOwner() external testIndex(11) {
     console.log("👑 Ownership transferral");
     try manager.setOwner(address(0)) {
       revert("Expected error.");
@@ -301,7 +359,7 @@ contract ProxyTest is TestOrder {
     console.log("     ✓ Returns updated owner address.");
   }
 
-  function test_badImplementationHolder() external testIndex(10) {
+  function test_badImplementationHolder() external testIndex(12) {
     console.log("🔥 Proxy failure conditions");
     errorHolder1 = new ErroneousHolder1();
     address proxy = address(new DelegateCallProxyManyToOne());
@@ -328,7 +386,7 @@ contract ProxyTest is TestOrder {
     console.log("     ✓ Reverts if the holder returns a null address.");
   }
 
-  function test_onlyOwner() external testIndex(11) {
+  function test_onlyOwner() external testIndex(13) {
     console.log("🔒 Owner restrictions");
     try manager.approveDeployer(address(this)) {
       revert("Expected error.");
