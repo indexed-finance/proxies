@@ -16,7 +16,7 @@ pragma solidity ^0.6.0;
  * used by many proxy contracts.
  */
 interface IDelegateCallProxyManager {
-/* ---  Events  --- */
+/* ==========  Events  ========== */
 
   event DeploymentApprovalGranted(address deployer);
   event DeploymentApprovalRevoked(address deployer);
@@ -46,7 +46,7 @@ interface IDelegateCallProxyManager {
     address implementationAddress
   );
 
-/* ---  Controls  --- */
+/* ==========  Controls  ========== */
 
   /**
    * @dev Allows `deployer` to deploy many-to-one proxies.
@@ -58,7 +58,7 @@ interface IDelegateCallProxyManager {
    */
   function revokeDeployerApproval(address deployer) external;
 
-/* ---  Implementation Management  --- */
+/* ==========  Implementation Management  ========== */
 
   /**
    * @dev Creates a many-to-one proxy relationship.
@@ -78,6 +78,16 @@ interface IDelegateCallProxyManager {
     bytes32 implementationID,
     address implementation
   ) external;
+
+  /**
+   * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.
+   */
+  function lockImplementationManyToOne(bytes32 implementationID) external;
+
+  /**
+   * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.
+   */
+  function lockImplementationOneToOne(address proxyAddress) external;
 
   /**
    * @dev Updates the implementation address for a many-to-one
@@ -109,7 +119,7 @@ interface IDelegateCallProxyManager {
     address implementation
   ) external;
 
-/* ---  Proxy Deployment  --- */
+/* ==========  Proxy Deployment  ========== */
 
   /**
    * @dev Deploy a proxy contract with a one-to-one relationship
@@ -141,8 +151,22 @@ interface IDelegateCallProxyManager {
     bytes32 suppliedSalt
   ) external returns(address proxyAddress);
 
-/* ---  Queries  --- */
+/* ==========  Queries  ========== */
 
+  /**
+   * @dev Returns a boolean stating whether `implementationID` is locked.
+   */
+  function isImplementationLocked(bytes32 implementationID) external view returns (bool);
+
+  /**
+   * @dev Returns a boolean stating whether `proxyAddress` is locked.
+   */
+  function isImplementationLocked(address proxyAddress) external view returns (bool);
+
+  /**
+   * @dev Returns a boolean stating whether `deployer` is allowed to deploy many-to-one
+   * proxies.
+   */
   function isApprovedDeployer(address deployer) external view returns (bool);
 
   /**
