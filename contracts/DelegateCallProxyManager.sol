@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.6.0;
 
-/* ---  External Libraries  --- */
+/* ==========  External Libraries  ========== */
 import { Create2 } from "@openzeppelin/contracts/utils/Create2.sol";
 import { Address } from "@openzeppelin/contracts/utils/Address.sol";
 
-/* ---  Proxy Contracts  --- */
+/* ==========  Proxy Contracts  ========== */
 import "./ManyToOneImplementationHolder.sol";
 import { DelegateCallProxyManyToOne } from "./DelegateCallProxyManyToOne.sol";
 import { DelegateCallProxyOneToOne } from "./DelegateCallProxyOneToOne.sol";
 
-/* ---  Internal Libraries  --- */
+/* ==========  Internal Libraries  ========== */
 import { SaltyLib as Salty } from "./SaltyLib.sol";
 
-/* ---  Inheritance  --- */
+/* ==========  Inheritance  ========== */
 import "./Owned.sol";
 import "./interfaces/IDelegateCallProxyManager.sol";
 
@@ -32,7 +32,8 @@ import "./interfaces/IDelegateCallProxyManager.sol";
  * used by many proxy contracts.
  */
 contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
-/* ---  Constants  --- */
+/* ==========  Constants  ========== */
+
   bytes32 internal constant ONE_TO_ONE_CODEHASH
   = keccak256(type(DelegateCallProxyOneToOne).creationCode);
 
@@ -42,7 +43,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
   bytes32 internal constant IMPLEMENTATION_HOLDER_CODEHASH
   = keccak256(type(ManyToOneImplementationHolder).creationCode);
 
-/* ---  Events  --- */
+/* ==========  Events  ========== */
 
   event DeploymentApprovalGranted(address deployer);
   event DeploymentApprovalRevoked(address deployer);
@@ -56,6 +57,8 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
     bytes32 implementationID,
     address implementationAddress
   );
+
+  event ManyToOne_ImplementationLocked(bytes32 implementationID);
 
   event ManyToOne_ProxyDeployed(
     bytes32 implementationID,
@@ -72,12 +75,18 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
     address implementationAddress
   );
 
-/* ---  Storage  --- */
+  event OneToOne_ImplementationLocked(address proxyAddress);
+
+/* ==========  Storage  ========== */
+
   // Addresses allowed to deploy many-to-one proxies.
   mapping(address => bool) internal _approvedDeployers;
 
   // Maps implementation holders to their implementation IDs.
   mapping(bytes32 => address) internal _implementationHolders;
+
+  // Maps implementation holders & proxy addresses to bool stating if they are locked.
+  mapping(address => bool) internal _lockedImplementations;
 
   // Temporary value used in the many-to-one proxy constructor.
   // The many-to-one proxy contract is deployed with create2 and
@@ -86,7 +95,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
   // address in order to save it as an immutable in the bytecode.
   address internal _implementationHolder;
 
-/* ---  Modifiers  --- */
+/* ==========  Modifiers  ========== */
 
   modifier _admin_ {
     require(
@@ -96,11 +105,11 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
     _;
   }
 
-/* ---  Constructor  --- */
+/* ==========  Constructor  ========== */
 
   constructor() public Owned(msg.sender) {}
 
-/* ---  Controls  --- */
+/* ==========  Access Control  ========== */
 
   /**
    * @dev Allows `deployer` to deploy many-to-one proxies.
@@ -118,7 +127,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
     emit DeploymentApprovalRevoked(deployer);
   }
 
-/* ---  Implementation Management  --- */
+/* ==========  Implementation Management  ========== */
 
   /**
    * @dev Creates a many-to-one proxy relationship.
@@ -163,6 +172,26 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
   }
 
   /**
+   * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.
+   */
+  function lockImplementationManyToOne(bytes32 implementationID) external override _owner_ {
+    // Read the implementation holder address from storage.
+    address implementationHolder = _implementationHolders[implementationID];
+    // Verify that the implementation exists.
+    require(implementationHolder != address(0), "ERR_IMPLEMENTATION_ID");
+    _lockedImplementations[implementationHolder] = true;
+    emit ManyToOne_ImplementationLocked(implementationID);
+  }
+
+  /**
+   * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.
+   */
+  function lockImplementationOneToOne(address proxyAddress) external override _owner_ {
+    _lockedImplementations[proxyAddress] = true;
+    emit OneToOne_ImplementationLocked(proxyAddress);
+  }
+
+  /**
    * @dev Updates the implementation address for a many-to-one
    * proxy relationship.
    *
@@ -183,6 +212,9 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
 
     // Verify that the implementation exists.
     require(implementationHolder != address(0), "ERR_IMPLEMENTATION_ID");
+
+    // Verify implementation is not locked
+    require(!_lockedImplementations[implementationHolder], "ERR_IMPLEMENTATION_LOCKED");
 
     // Set the implementation address
     _setImplementation(implementationHolder, implementation);
@@ -213,13 +245,16 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
     override
     _owner_
   {
+    // Verify proxy is not locked
+    require(!_lockedImplementations[proxyAddress], "ERR_IMPLEMENTATION_LOCKED");
+
     // Set the implementation address
     _setImplementation(proxyAddress, implementation);
 
     emit OneToOne_ImplementationUpdated(proxyAddress, implementation);
   }
 
-/* ---  Proxy Deployment  --- */
+/* ==========  Proxy Deployment  ========== */
 
   /**
    * @dev Deploy a proxy contract with a one-to-one relationship
@@ -308,8 +343,32 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
     );
   }
 
-/* ---  Queries  --- */
+/* ==========  Queries  ========== */
 
+  /**
+   * @dev Returns a boolean stating whether `implementationID` is locked.
+   */
+  function isImplementationLocked(bytes32 implementationID) external override view returns (bool) {
+    // Read the implementation holder address from storage.
+    address implementationHolder = _implementationHolders[implementationID];
+
+    // Verify that the implementation exists.
+    require(implementationHolder != address(0), "ERR_IMPLEMENTATION_ID");
+
+    return _lockedImplementations[implementationHolder];
+  }
+
+  /**
+   * @dev Returns a boolean stating whether `proxyAddress` is locked.
+   */
+  function isImplementationLocked(address proxyAddress) external override view returns (bool) {
+    return _lockedImplementations[proxyAddress];
+  }
+
+  /**
+   * @dev Returns a boolean stating whether `deployer` is allowed to deploy many-to-one
+   * proxies.
+   */
   function isApprovedDeployer(address deployer) external override view returns (bool) {
     return _approvedDeployers[deployer];
   }
@@ -411,7 +470,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
     );
   }
 
-/* ---  Internal Functions  --- */
+/* ==========  Internal Functions  ========== */
 
   /**
    * @dev Sets the implementation address for a one-to-one proxy or
