@@ -45,6 +45,13 @@ describe('Proxies', async () => {
     await testContract.test_setImplementationAddressOneToOne()
   });
 
+  it('test_lockImplementationOneToOne', async () => {
+    await testContract.test_lockImplementationOneToOne();
+  });
+  it('test_lockImplementationManyToOne', async () => {
+    await testContract.test_lockImplementationManyToOne();
+  });
+
   it('setOwner()', async () => {
     await testContract.test_setOwner()
   });
