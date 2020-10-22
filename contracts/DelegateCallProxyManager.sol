@@ -25,11 +25,36 @@ import "./interfaces/IDelegateCallProxyManager.sol";
  * used to specify the logic address for a particular contract type, and to
  * upgrade the implementation as needed.
  *
+ * ====== Proxy Types ======
  * A one-to-one proxy is a single proxy contract with an upgradeable implementation
  * address.
  *
  * A many-to-one proxy is a single upgradeable implementation address that may be
  * used by many proxy contracts.
+ *
+ * ====== Access Control ======
+ * The proxy manager has a single address as its owner.
+ *
+ * The owner is the sole account with the following permissions:
+ * - Create new many-to-one implementations
+ * - Create new one-to-one proxies
+ * - Modify the implementation address of existing proxies
+ * - Lock proxies
+ * - Designate approved deployers
+ * - Remove approved deployers
+ * - Modify the owner address
+ *
+ * Approved deployers may only deploy many-to-one proxies.
+ *
+ * ====== Upgrades ======
+ * Proxies can be upgraded by the owner if they are not locked.
+ *
+ * Many-to-one proxy implementations are upgraded by calling the holder contract
+ * for the implementation ID being upgraded.
+ * One-to-one proxies are upgraded by calling the proxy contract directly.
+ *
+ * The owner can lock a one-to-one proxy or many-to-one implementation ID so that
+ * it becomes impossible to upgrade.
  */
 contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
 /* ==========  Constants  ========== */
@@ -97,7 +122,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
 
 /* ==========  Modifiers  ========== */
 
-  modifier _admin_ {
+  modifier onlyApprovedDeployer {
     require(
       msg.sender == _owner || _approvedDeployers[msg.sender],
       "ERR_NOT_APPROVED"
@@ -305,7 +330,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
   function deployProxyManyToOne(bytes32 implementationID, bytes32 suppliedSalt)
     external
     override
-    _admin_
+    onlyApprovedDeployer
     returns(address proxyAddress)
   {
     // Read the implementation holder address from storage.
