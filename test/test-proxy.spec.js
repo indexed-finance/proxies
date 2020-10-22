@@ -52,15 +52,15 @@ describe('Proxies', async () => {
     await testContract.test_lockImplementationManyToOne();
   });
 
-  it('setOwner()', async () => {
-    await testContract.test_setOwner()
+  it('transferOwnership()', async () => {
+    await testContract.test_transferOwnership()
   });
 
   it('DelegateCallProxyManyToOne', async () => {
     await testContract.test_badImplementationHolder()
   });
 
-  it('_owner_ modifier', async () => {
+  it('onlyOwner modifier', async () => {
     await testContract.test_onlyOwner()
   });
 });

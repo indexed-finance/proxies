@@ -342,20 +342,20 @@ contract ProxyTest is TestOrder {
     console.log("    ✓ Fails to query unrecognized implementation.");
   }
 
-  function test_setOwner() external testIndex(11) {
+  function test_transferOwnership() external testIndex(11) {
     console.log("👑 Ownership transferral");
-    try manager.setOwner(address(0)) {
+    try manager.transferOwnership(address(0)) {
       revert("Expected error.");
     } catch Error(string memory errorMsg) {
       require(
-        keccak256(abi.encodePacked(errorMsg)) == keccak256("ERR_NULL_ADDRESS"),
-        "Error: Expected ERR_NULL_ADDRESS error message."
+        keccak256(abi.encodePacked(errorMsg)) == keccak256("Ownable: new owner is the zero address"),
+        "Error: Expected 'Ownable: new owner is the zero address' error message."
       );
     }
     console.log("     ✓ Fails to transfer ownership to null address.");
-    manager.setOwner(address(32));
+    manager.transferOwnership(address(32));
     console.log("     ✓ Transfers ownership to non-null address.");
-    require(address(32) == manager.getOwner(), "Error: Manager returned unexpected owner address.");
+    require(address(32) == manager.owner(), "Error: Manager returned unexpected owner address.");
     console.log("     ✓ Returns updated owner address.");
   }
 
@@ -392,8 +392,8 @@ contract ProxyTest is TestOrder {
       revert("Expected error.");
     } catch Error(string memory errorMsg) {
       require(
-        keccak256(abi.encodePacked(errorMsg)) == keccak256("ERR_NOT_OWNER"),
-        "Error: Expected ERR_NOT_OWNER error message."
+        keccak256(abi.encodePacked(errorMsg)) == keccak256("Ownable: caller is not the owner"),
+        "Error: Expected Ownable: caller is not the owner error message."
       );
     }
     console.log("     ✓ approveDeployer(): Reverts when called by non-owner.");
@@ -402,8 +402,8 @@ contract ProxyTest is TestOrder {
       revert("Expected error.");
     } catch Error(string memory errorMsg) {
       require(
-        keccak256(abi.encodePacked(errorMsg)) == keccak256("ERR_NOT_OWNER"),
-        "Error: Expected ERR_NOT_OWNER error message."
+        keccak256(abi.encodePacked(errorMsg)) == keccak256("Ownable: caller is not the owner"),
+        "Error: Expected Ownable: caller is not the owner error message."
       );
     }
     console.log("     ✓ revokeDeployerApproval(): Reverts when called by non-owner.");
@@ -412,8 +412,8 @@ contract ProxyTest is TestOrder {
       revert("Expected error.");
     } catch Error(string memory errorMsg) {
       require(
-        keccak256(abi.encodePacked(errorMsg)) == keccak256("ERR_NOT_OWNER"),
-        "Error: Expected ERR_NOT_OWNER error message."
+        keccak256(abi.encodePacked(errorMsg)) == keccak256("Ownable: caller is not the owner"),
+        "Error: Expected Ownable: caller is not the owner error message."
       );
     }
     console.log("     ✓ deployProxyOneToOne(): Reverts when called by non-owner.");
@@ -422,8 +422,8 @@ contract ProxyTest is TestOrder {
       revert("Expected error.");
     } catch Error(string memory errorMsg) {
       require(
-        keccak256(abi.encodePacked(errorMsg)) == keccak256("ERR_NOT_OWNER"),
-        "Error: Expected ERR_NOT_OWNER error message."
+        keccak256(abi.encodePacked(errorMsg)) == keccak256("Ownable: caller is not the owner"),
+        "Error: Expected Ownable: caller is not the owner error message."
       );
     }
     console.log("     ✓ createManyToOneProxyRelationship(): Reverts when called by non-owner.");
@@ -432,8 +432,8 @@ contract ProxyTest is TestOrder {
       revert("Expected error.");
     } catch Error(string memory errorMsg) {
       require(
-        keccak256(abi.encodePacked(errorMsg)) == keccak256("ERR_NOT_OWNER"),
-        "Error: Expected ERR_NOT_OWNER error message."
+        keccak256(abi.encodePacked(errorMsg)) == keccak256("Ownable: caller is not the owner"),
+        "Error: Expected Ownable: caller is not the owner error message."
       );
     }
     console.log("     ✓ setImplementationAddressOneToOne(): Reverts when called by non-owner.");
@@ -442,8 +442,8 @@ contract ProxyTest is TestOrder {
       revert("Expected error.");
     } catch Error(string memory errorMsg) {
       require(
-        keccak256(abi.encodePacked(errorMsg)) == keccak256("ERR_NOT_OWNER"),
-        "Error: Expected ERR_NOT_OWNER error message."
+        keccak256(abi.encodePacked(errorMsg)) == keccak256("Ownable: caller is not the owner"),
+        "Error: Expected Ownable: caller is not the owner error message."
       );
     }
     console.log("     ✓ setImplementationAddressManyToOne(): Reverts when called by non-owner.");
