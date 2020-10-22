@@ -197,7 +197,7 @@ contract DelegateCallProxyManager is Ownable, IDelegateCallProxyManager {
   }
 
   /**
-   * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.
+   * @dev Lock the current implementation for `implementationID` so that it can never be upgraded again.
    */
   function lockImplementationManyToOne(bytes32 implementationID) external override onlyOwner {
     // Read the implementation holder address from storage.
