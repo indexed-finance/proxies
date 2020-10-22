@@ -1,6 +1,6 @@
 {
   "name": "@indexed-finance/proxies",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Solidity delegatecall proxy contracts.",
   "repository": {
     "url": "https://github.com/indexed-finance/proxies"
