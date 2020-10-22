@@ -10,6 +10,15 @@ import { DelegateCallProxyManyToOne } from "./DelegateCallProxyManyToOne.sol";
 import { DelegateCallProxyOneToOne } from "./DelegateCallProxyOneToOne.sol";
 
 
+/**
+ * @dev Library for computing create2 salts and addresses for proxies
+ * deployed by `DelegateCallProxyManager`.
+ *
+ * Because the proxy factory is meant to be used by multiple contracts,
+ * we use a salt derivation pattern that includes the address of the
+ * contract that requested the proxy deployment, a salt provided by that
+ * contract and the implementation ID used (for many-to-one proxies only).
+ */
 library SaltyLib {
 /* ---  Constants  --- */
   bytes32 internal constant ONE_TO_ONE_CODEHASH = keccak256(
