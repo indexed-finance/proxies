@@ -8,9 +8,10 @@ import { Proxy } from "@openzeppelin/contracts/proxy/Proxy.sol";
  * @dev Proxy contract which uses an implementation address shared with many
  * other proxies.
  *
- * An implementation holder contract stores the upgradeable logic address.
- * The proxy contract calls the implementation holder to execute each delegated
- * transaction.
+ * An implementation holder contract stores the upgradeable implementation address.
+ * When the proxy is called, it queries the implementation address from the holder
+ * contract and delegatecalls the returned address, forwarding the received calldata
+ * and ether.
  *
  * Note: This contract does not verify that the implementation
  * address is a valid delegation target. The manager must perform
