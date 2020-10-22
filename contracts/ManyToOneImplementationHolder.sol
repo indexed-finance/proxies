@@ -16,12 +16,12 @@ pragma solidity ^0.6.0;
  */
 contract ManyToOneImplementationHolder {
 /* ---  Storage  --- */
-  address internal immutable _owner;
+  address internal immutable _manager;
   address internal _implementation;
 
 /* ---  Constructor  --- */
   constructor() public {
-    _owner = msg.sender;
+    _manager = msg.sender;
   }
 
   /**
@@ -36,7 +36,7 @@ contract ManyToOneImplementationHolder {
    * Otherwise, returns the stored implementation address.
    */
   fallback() external payable {
-    if (msg.sender != _owner) {
+    if (msg.sender != _manager) {
       assembly {
         mstore(0, sload(0))
         return(0, 32)
