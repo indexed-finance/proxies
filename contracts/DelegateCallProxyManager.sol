@@ -4,6 +4,7 @@ pragma solidity ^0.6.0;
 /* ==========  External Libraries  ========== */
 import { Create2 } from "@openzeppelin/contracts/utils/Create2.sol";
 import { Address } from "@openzeppelin/contracts/utils/Address.sol";
+import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
 /* ==========  Proxy Contracts  ========== */
 import "./ManyToOneImplementationHolder.sol";
@@ -14,7 +15,6 @@ import { DelegateCallProxyOneToOne } from "./DelegateCallProxyOneToOne.sol";
 import { SaltyLib as Salty } from "./SaltyLib.sol";
 
 /* ==========  Inheritance  ========== */
-import "./Owned.sol";
 import "./interfaces/IDelegateCallProxyManager.sol";
 
 
@@ -56,7 +56,7 @@ import "./interfaces/IDelegateCallProxyManager.sol";
  * The owner can lock a one-to-one proxy or many-to-one implementation ID so that
  * it becomes impossible to upgrade.
  */
-contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
+contract DelegateCallProxyManager is Ownable, IDelegateCallProxyManager {
 /* ==========  Constants  ========== */
 
   bytes32 internal constant ONE_TO_ONE_CODEHASH
@@ -124,7 +124,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
 
   modifier onlyApprovedDeployer {
     require(
-      msg.sender == _owner || _approvedDeployers[msg.sender],
+      _approvedDeployers[_msgSender()] || _msgSender() == owner(),
       "ERR_NOT_APPROVED"
     );
     _;
@@ -132,14 +132,14 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
 
 /* ==========  Constructor  ========== */
 
-  constructor() public Owned(msg.sender) {}
+  constructor() public Ownable() {}
 
 /* ==========  Access Control  ========== */
 
   /**
    * @dev Allows `deployer` to deploy many-to-one proxies.
    */
-  function approveDeployer(address deployer) external override _owner_ {
+  function approveDeployer(address deployer) external override onlyOwner {
     _approvedDeployers[deployer] = true;
     emit DeploymentApprovalGranted(deployer);
   }
@@ -147,7 +147,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
   /**
    * @dev Prevents `deployer` from deploying many-to-one proxies.
    */
-  function revokeDeployerApproval(address deployer) external override _owner_ {
+  function revokeDeployerApproval(address deployer) external override onlyOwner {
     _approvedDeployers[deployer] = false;
     emit DeploymentApprovalRevoked(deployer);
   }
@@ -174,7 +174,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
   )
     external
     override
-    _owner_
+    onlyOwner
   {
     // Deploy the implementation holder contract with the implementation
     // ID as the create2 salt.
@@ -199,7 +199,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
   /**
    * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.
    */
-  function lockImplementationManyToOne(bytes32 implementationID) external override _owner_ {
+  function lockImplementationManyToOne(bytes32 implementationID) external override onlyOwner {
     // Read the implementation holder address from storage.
     address implementationHolder = _implementationHolders[implementationID];
     // Verify that the implementation exists.
@@ -211,7 +211,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
   /**
    * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.
    */
-  function lockImplementationOneToOne(address proxyAddress) external override _owner_ {
+  function lockImplementationOneToOne(address proxyAddress) external override onlyOwner {
     _lockedImplementations[proxyAddress] = true;
     emit OneToOne_ImplementationLocked(proxyAddress);
   }
@@ -230,7 +230,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
   )
     external
     override
-    _owner_
+    onlyOwner
   {
     // Read the implementation holder address from storage.
     address implementationHolder = _implementationHolders[implementationID];
@@ -268,7 +268,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
   )
     external
     override
-    _owner_
+    onlyOwner
   {
     // Verify proxy is not locked
     require(!_lockedImplementations[proxyAddress], "ERR_IMPLEMENTATION_LOCKED");
@@ -298,12 +298,12 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
   )
     external
     override
-    _owner_
+    onlyOwner
     returns(address proxyAddress)
   {
     // Derive the create2 salt from the deployment requester's address
     // and the requester-supplied salt.
-    bytes32 salt = Salty.deriveOneToOneSalt(msg.sender, suppliedSalt);
+    bytes32 salt = Salty.deriveOneToOneSalt(_msgSender(), suppliedSalt);
 
     // Deploy the proxy
     proxyAddress = Create2.deploy(
@@ -342,7 +342,7 @@ contract DelegateCallProxyManager is Owned, IDelegateCallProxyManager {
     // Derive the create2 salt from the deployment requester's address, the
     // implementation ID and the requester-supplied salt.
     bytes32 salt = Salty.deriveManyToOneSalt(
-      msg.sender,
+      _msgSender(),
       implementationID,
       suppliedSalt
     );
