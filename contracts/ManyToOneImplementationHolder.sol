@@ -3,11 +3,16 @@ pragma solidity ^0.6.0;
 
 
 /**
- * @dev Stores a single implementation address which is used by
- * many proxies.
+ * @dev The ManyToOneImplementationHolder stores an upgradeable implementation address
+ * in storage, which many-to-one proxies query at execution time to determine which
+ * contract to delegate to.
  *
- * Inspired by the DharmaUpgradeBeacon from 0age
- * dharma-eng/dharma-smart-wallet/contracts/upgradeability/DharmaUpgradeBeacon.sol
+ * The manager can upgrade the implementation address by calling the holder with the
+ * abi-encoded address as calldata. If any other account calls the implementation holder,
+ * it will return the implementation address.
+ *
+ * This pattern was inspired by the DharmaUpgradeBeacon from 0age
+ * https://github.com/dharma-eng/dharma-smart-wallet/blob/master/contracts/upgradeability/smart-wallet/DharmaUpgradeBeacon.sol
  */
 contract ManyToOneImplementationHolder {
 /* ---  Storage  --- */
