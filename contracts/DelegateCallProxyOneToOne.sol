@@ -7,19 +7,20 @@ import { Proxy } from "@openzeppelin/contracts/proxy/Proxy.sol";
 /**
  * @dev Upgradeable delegatecall proxy for a single contract.
  *
- * This proxy stores an implementation address which can be
- * upgraded by the proxy manager.
+ * This proxy stores an implementation address which can be upgraded by the proxy manager.
  *
- * The storage slot for the implementation address is:
+ * To upgrade the implementation, the manager calls the proxy with the abi encoded implementation address.
+ *
+ * If any other account calls the proxy, it will delegatecall the implementation address with the received
+ * calldata and ether. If the call succeeds, it will return with the received returndata.
+ * If it reverts, it will revert with the received revert data.
+ *
+ * Note: The storage slot for the implementation address is:
  * `bytes32(uint256(keccak256("IMPLEMENTATION_ADDRESS")) + 1)`
  * This slot must not be used by the implementation contract.
  *
- * To upgrade the proxy, the manager calls the proxy with the
- * abi encoded implementation address.
- *
- * Note: This contract does not verify that the implementation
- * address is a valid delegation target. The manager must perform
- * this safety check.
+ * Note: This contract does not verify that the implementation address is a valid delegation target.
+ * The manager must perform this safety check.
  */
 contract DelegateCallProxyOneToOne is Proxy {
 /* ---  Constants  --- */
