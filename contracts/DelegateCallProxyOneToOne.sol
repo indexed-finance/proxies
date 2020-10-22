@@ -24,11 +24,11 @@ import { Proxy } from "@openzeppelin/contracts/proxy/Proxy.sol";
  */
 contract DelegateCallProxyOneToOne is Proxy {
 /* ---  Constants  --- */
-  address internal immutable _owner;
+  address internal immutable _manager;
 
 /* ---  Constructor  --- */
   constructor() public {
-    _owner = msg.sender ;
+    _manager = msg.sender ;
   }
 
 /* ---  Internal Overrides  --- */
@@ -57,7 +57,7 @@ contract DelegateCallProxyOneToOne is Proxy {
     * If it is not, continues execution with the fallback function.
     */
   function _beforeFallback() internal override {
-    if (msg.sender != _owner) {
+    if (msg.sender != _manager) {
       super._beforeFallback();
     } else {
       assembly {
