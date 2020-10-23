@@ -12,10 +12,6 @@ const IMPLEMENTATION_HOLDER_CODEHASH = soliditySha3(toBytecode('ManyToOneImpleme
 const CodeHashesLibrary = `// SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.6.0;
 
-import "./ManyToOneImplementationHolder.sol";
-import { DelegateCallProxyManyToOne } from "./DelegateCallProxyManyToOne.sol";
-import { DelegateCallProxyOneToOne } from "./DelegateCallProxyOneToOne.sol";
-
 
 /**
  * @dev Because we use the code hashes of the proxy contracts for proxy address
