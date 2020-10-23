@@ -1,7 +1,7 @@
 const chai = require("chai");
 const { expect } = chai;
 
-const { soliditySha3, toBN } = require('web3-utils');
+const { soliditySha3 } = require('web3-utils');
 
 describe('Mock Proxy Factory', async () => {
   let proxyManager;
