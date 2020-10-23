@@ -12,7 +12,9 @@
     "deployments/mainnet"
   ],
   "scripts": {
+    "prebuild": "buidler compile && node ./scripts/write-code-hashes.js",
     "build": "buidler compile",
+    "postbuild": "echo Built sol files with updated CodeHashes",
     "coverage": "buidler coverage --network coverage --solcoverjs ./.solcover.js",
     "deploy:rinkeby": "buidler --network rinkeby deploy",
     "test": "buidler test ./test/test-proxy.spec.js",
