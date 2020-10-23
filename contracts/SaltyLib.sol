@@ -5,9 +5,7 @@ pragma solidity ^0.6.0;
 import { Create2 } from "@openzeppelin/contracts/utils/Create2.sol";
 
 /* ---  Proxy Contracts  --- */
-import "./ManyToOneImplementationHolder.sol";
-import { DelegateCallProxyManyToOne } from "./DelegateCallProxyManyToOne.sol";
-import { DelegateCallProxyOneToOne } from "./DelegateCallProxyOneToOne.sol";
+import { CodeHashes } from "./CodeHashes.sol";
 
 
 /**
@@ -20,19 +18,6 @@ import { DelegateCallProxyOneToOne } from "./DelegateCallProxyOneToOne.sol";
  * contract and the implementation ID used (for many-to-one proxies only).
  */
 library SaltyLib {
-/* ---  Constants  --- */
-  bytes32 internal constant ONE_TO_ONE_CODEHASH = keccak256(
-    type(DelegateCallProxyOneToOne).creationCode
-  );
-
-  bytes32 internal constant MANY_TO_ONE_CODEHASH = keccak256(
-    type(DelegateCallProxyManyToOne).creationCode
-  );
-
-  bytes32 internal constant IMPLEMENTATION_HOLDER_CODEHASH = keccak256(
-    type(ManyToOneImplementationHolder).creationCode
-  );
-
 /* ---  Salt Derivation  --- */
 
   /**
@@ -104,7 +89,7 @@ library SaltyLib {
     returns (address)
   {
     bytes32 salt = deriveOneToOneSalt(originator, suppliedSalt);
-    return Create2.computeAddress(salt, ONE_TO_ONE_CODEHASH, deployer);
+    return Create2.computeAddress(salt, CodeHashes.ONE_TO_ONE_CODEHASH, deployer);
   }
 
   /**
@@ -132,7 +117,7 @@ library SaltyLib {
       implementationID,
       suppliedSalt
     );
-    return Create2.computeAddress(salt, MANY_TO_ONE_CODEHASH, deployer);
+    return Create2.computeAddress(salt, CodeHashes.MANY_TO_ONE_CODEHASH, deployer);
   }
 
   /**
@@ -152,7 +137,7 @@ library SaltyLib {
   {
     return Create2.computeAddress(
       implementationID,
-      IMPLEMENTATION_HOLDER_CODEHASH,
+      CodeHashes.IMPLEMENTATION_HOLDER_CODEHASH,
       deployer
     );
   }
