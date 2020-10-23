@@ -123,10 +123,8 @@ contract DelegateCallProxyManager is Ownable, IDelegateCallProxyManager {
 /* ==========  Modifiers  ========== */
 
   modifier onlyApprovedDeployer {
-    require(
-      _approvedDeployers[_msgSender()] || _msgSender() == owner(),
-      "ERR_NOT_APPROVED"
-    );
+    address sender = _msgSender();
+    require(_approvedDeployers[sender] || sender == owner(), "ERR_NOT_APPROVED");
     _;
   }
 
