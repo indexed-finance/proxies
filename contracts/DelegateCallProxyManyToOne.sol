@@ -18,12 +18,12 @@ import { Proxy } from "@openzeppelin/contracts/proxy/Proxy.sol";
  * this safety check before updating the implementation on the holder.
  */
 contract DelegateCallProxyManyToOne is Proxy {
-/* ---  Constants  --- */
+/* ==========  Constants  ========== */
 
   // Address that stores the implementation address.
   address internal immutable _implementationHolder;
 
-/* ---  Constructor  --- */
+/* ==========  Constructor  ========== */
 
   constructor() public {
     // Calls the sender rather than receiving the address in the constructor
@@ -31,7 +31,7 @@ contract DelegateCallProxyManyToOne is Proxy {
     _implementationHolder = ProxyDeployer(msg.sender).getImplementationHolder();
   }
 
-/* ---  Internal Overrides  --- */
+/* ==========  Internal Overrides  ========== */
 
   /**
    * @dev Queries the implementation address from the implementation holder.
