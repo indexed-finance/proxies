@@ -15,9 +15,11 @@
     "prebuild": "buidler compile && node ./scripts/write-code-hashes.js",
     "build": "buidler compile",
     "postbuild": "echo Built sol files with updated CodeHashes",
+    "precoverage": "cross-env IS_COVERAGE=true node ./scripts/write-code-hashes.js",
     "coverage": "buidler coverage --network coverage --solcoverjs ./.solcover.js",
+    "postcoverage": "node ./scripts/write-code-hashes.js",
     "deploy:rinkeby": "buidler --network rinkeby deploy",
-    "test": "buidler test ./test/test-proxy.spec.js",
+    "test": "buidler test",
     "node": "npx buidler node --port 8546 --verbose",
     "benchmark": "cross-env REPORT_GAS=true npx buidler test ./test/benchmark.spec.js"
   },
