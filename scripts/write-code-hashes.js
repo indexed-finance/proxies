@@ -2,16 +2,25 @@ const fs = require('fs');
 const path = require('path');
 const { soliditySha3 } = require('web3-utils');
 
-const artifactsDir = path.join(__dirname, '..', 'artifacts');
-const toBytecode = (file) => require(path.join(artifactsDir, file)).bytecode;
+const isCoverage = Boolean(process.env.IS_COVERAGE);
 
-const ONE_TO_ONE_CODEHASH = soliditySha3(toBytecode('DelegateCallProxyOneToOne.json'));
-const MANY_TO_ONE_CODEHASH = soliditySha3(toBytecode('DelegateCallProxyManyToOne.json'));
-const IMPLEMENTATION_HOLDER_CODEHASH = soliditySha3(toBytecode('ManyToOneImplementationHolder.json'));
+const artifactsDir = path.join(__dirname, '..', 'artifacts');
+const toCodeHash = (file) => isCoverage
+  ? `keccak256(type(${file}).creationCode)`
+  : soliditySha3(require(path.join(artifactsDir, `${file}.json`)).bytecode);
+
+const ONE_TO_ONE_CODEHASH = toCodeHash('DelegateCallProxyOneToOne');
+const MANY_TO_ONE_CODEHASH = toCodeHash('DelegateCallProxyManyToOne');
+const IMPLEMENTATION_HOLDER_CODEHASH = toCodeHash('ManyToOneImplementationHolder');
+
+const imports = isCoverage ? `import "./ManyToOneImplementationHolder.sol";
+import { DelegateCallProxyManyToOne } from "./DelegateCallProxyManyToOne.sol";
+import { DelegateCallProxyOneToOne } from "./DelegateCallProxyOneToOne.sol";
+` : '';
 
 const CodeHashesLibrary = `// SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.6.0;
-
+pragma solidity =0.6.12;
+${imports}
 
 /**
  * @dev Because we use the code hashes of the proxy contracts for proxy address
