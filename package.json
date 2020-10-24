@@ -1,6 +1,6 @@
 {
   "name": "@indexed-finance/proxies",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Solidity delegatecall proxy contracts.",
   "repository": {
     "url": "https://github.com/indexed-finance/proxies"
@@ -12,12 +12,22 @@
     "deployments/mainnet"
   ],
   "scripts": {
+    "prebuild": "buidler compile && node ./scripts/write-code-hashes.js",
     "build": "buidler compile",
+    "postbuild": "echo Built sol files with updated CodeHashes",
+    "precoverage": "cross-env IS_COVERAGE=true node ./scripts/write-code-hashes.js",
     "coverage": "buidler coverage --network coverage --solcoverjs ./.solcover.js",
+    "postcoverage": "node ./scripts/write-code-hashes.js",
     "deploy:rinkeby": "buidler --network rinkeby deploy",
-    "test": "buidler test ./test/test-proxy.spec.js",
+    "test": "buidler test",
     "node": "npx buidler node --port 8546 --verbose",
     "benchmark": "cross-env REPORT_GAS=true npx buidler test ./test/benchmark.spec.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run build && npm run coverage && npm test",
+      "...": "..."
+    }
   },
   "keywords": [],
   "author": "Dillon Kellar",
@@ -40,6 +50,7 @@
     "dotenv": "^8.2.0",
     "ethereumjs-wallet": "^0.6.5",
     "ethers": "^5.0.8",
+    "husky": "^4.3.0",
     "moment": "^2.29.1",
     "prettier": "^2.0.5",
     "prettier-plugin-solidity": "^1.0.0-alpha.55",

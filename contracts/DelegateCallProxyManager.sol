@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.6.0;
+pragma solidity =0.6.12;
 
 /* ==========  External Libraries  ========== */
 import { Create2 } from "@openzeppelin/contracts/utils/Create2.sol";
@@ -13,6 +13,7 @@ import { DelegateCallProxyOneToOne } from "./DelegateCallProxyOneToOne.sol";
 
 /* ==========  Internal Libraries  ========== */
 import { SaltyLib as Salty } from "./SaltyLib.sol";
+import { CodeHashes } from "./CodeHashes.sol";
 
 /* ==========  Inheritance  ========== */
 import "./interfaces/IDelegateCallProxyManager.sol";
@@ -57,17 +58,6 @@ import "./interfaces/IDelegateCallProxyManager.sol";
  * it becomes impossible to upgrade.
  */
 contract DelegateCallProxyManager is Ownable, IDelegateCallProxyManager {
-/* ==========  Constants  ========== */
-
-  bytes32 internal constant ONE_TO_ONE_CODEHASH
-  = keccak256(type(DelegateCallProxyOneToOne).creationCode);
-
-  bytes32 internal constant MANY_TO_ONE_CODEHASH
-  = keccak256(type(DelegateCallProxyManyToOne).creationCode);
-
-  bytes32 internal constant IMPLEMENTATION_HOLDER_CODEHASH
-  = keccak256(type(ManyToOneImplementationHolder).creationCode);
-
 /* ==========  Events  ========== */
 
   event DeploymentApprovalGranted(address deployer);
@@ -444,7 +434,7 @@ contract DelegateCallProxyManager is Ownable, IDelegateCallProxyManager {
     returns (address)
   {
     bytes32 salt = Salty.deriveOneToOneSalt(originator, suppliedSalt);
-    return Create2.computeAddress(salt, ONE_TO_ONE_CODEHASH);
+    return Create2.computeAddress(salt, CodeHashes.ONE_TO_ONE_CODEHASH);
   }
 
   /**
@@ -472,7 +462,7 @@ contract DelegateCallProxyManager is Ownable, IDelegateCallProxyManager {
       implementationID,
       suppliedSalt
     );
-    return Create2.computeAddress(salt, MANY_TO_ONE_CODEHASH);
+    return Create2.computeAddress(salt, CodeHashes.MANY_TO_ONE_CODEHASH);
   }
 
   /**
@@ -489,7 +479,7 @@ contract DelegateCallProxyManager is Ownable, IDelegateCallProxyManager {
   {
     return Create2.computeAddress(
       implementationID,
-      IMPLEMENTATION_HOLDER_CODEHASH
+      CodeHashes.IMPLEMENTATION_HOLDER_CODEHASH
     );
   }
 
