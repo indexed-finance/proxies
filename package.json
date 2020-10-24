@@ -21,6 +21,12 @@
     "node": "npx buidler node --port 8546 --verbose",
     "benchmark": "cross-env REPORT_GAS=true npx buidler test ./test/benchmark.spec.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run build && npm run coverage && npm test",
+      "...": "..."
+    }
+  },
   "keywords": [],
   "author": "Dillon Kellar",
   "license": "GPL-3.0-or-later",
@@ -42,6 +48,7 @@
     "dotenv": "^8.2.0",
     "ethereumjs-wallet": "^0.6.5",
     "ethers": "^5.0.8",
+    "husky": "^4.3.0",
     "moment": "^2.29.1",
     "prettier": "^2.0.5",
     "prettier-plugin-solidity": "^1.0.0-alpha.55",
