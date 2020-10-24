@@ -14,14 +14,11 @@ const logger = {
 
 module.exports = async ({
   deployments,
-  getChainId,
-  getNamedAccounts,
-  ethers
+  getNamedAccounts
 }) => {
   const { save } = deployments;
   const { deployer } = await getNamedAccounts();
 
-  // For some reason the contractName field wasn't properly being saved to deployments.
   const deploy = async (name, contractName, opts) => {
     logger.info(`Deploying ${contractName} [${name}]`);
     const deployment = await deployments.deploy(name, {
@@ -33,8 +30,6 @@ module.exports = async ({
     }
     return deployment;
   };
-
-  logger.info('Executing deployment script.');
 
   await deploy('DelegateCallProxyManager', 'proxyManager', {
     from: deployer,
