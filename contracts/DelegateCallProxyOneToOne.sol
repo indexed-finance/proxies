@@ -23,15 +23,15 @@ import { Proxy } from "@openzeppelin/contracts/proxy/Proxy.sol";
  * The manager must perform this safety check.
  */
 contract DelegateCallProxyOneToOne is Proxy {
-/* ---  Constants  --- */
+/* ==========  Constants  ========== */
   address internal immutable _manager;
 
-/* ---  Constructor  --- */
+/* ==========  Constructor  ========== */
   constructor() public {
     _manager = msg.sender ;
   }
 
-/* ---  Internal Overrides  --- */
+/* ==========  Internal Overrides  ========== */
 
   /**
    * @dev Reads the implementation address from storage.

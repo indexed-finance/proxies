@@ -19,7 +19,7 @@ import { DelegateCallProxyOneToOne } from "./DelegateCallProxyOneToOne.sol";
 ` : '';
 
 const CodeHashesLibrary = `// SPDX-License-Identifier: GPL-3.0
-pragma solidity =0.6.12;
+pragma solidity ^0.6.0;
 ${imports}
 
 /**
