@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.6.0;
+pragma solidity =0.6.12;
 
 
 /**
@@ -8,7 +8,7 @@ pragma solidity ^0.6.0;
  * values when they import the salt library.
  */
 library CodeHashes {
-  bytes32 internal constant ONE_TO_ONE_CODEHASH = 0xfeddfba61044051906dd1a07bb1531102730bc2ac6f0a420b8126c5ba6c10cf7;
-  bytes32 internal constant MANY_TO_ONE_CODEHASH = 0x2f98a80b374682a6ae977e416d9b4a15fc5c083cd80e6b70d2542ebeca2c2918;
-  bytes32 internal constant IMPLEMENTATION_HOLDER_CODEHASH = 0xa558acad70fc124d64322222d54e3d36df3cfa2816409762b436d03a15018df3;
+  bytes32 internal constant ONE_TO_ONE_CODEHASH = 0x980843d7182154db438d410718903ca4c4116c8f430643d49eb654ed1776ed41;
+  bytes32 internal constant MANY_TO_ONE_CODEHASH = 0xb4e09618634e1d4fad81090ab8fb8259b749a9202aa02d7720af654b9b4ca17b;
+  bytes32 internal constant IMPLEMENTATION_HOLDER_CODEHASH = 0xfc7aed17e5c5d36a15e443235cb9c59bae4a013202cde6ab3e657fa1176d7f3e;
 }
