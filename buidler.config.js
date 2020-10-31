@@ -9,8 +9,6 @@ const { randomBytes } = require('crypto');
 
 usePlugin("buidler-ethers-v5");
 usePlugin("buidler-deploy");
-usePlugin('buidler-abi-exporter');
-usePlugin('buidler-gas-reporter');
 usePlugin("solidity-coverage");
 
 const keys = {
@@ -21,23 +19,9 @@ const keys = {
 };
 
 module.exports = {
-  abiExporter: {
-    path: './abi',
-    only: [
-      'IDelegateCallProxyManager'
-    ],
-    clear: true,
-  },
   etherscan: {
     url: "https://api.etherscan.io/api",
     apiKey: process.env.ETHERSCAN_API_KEY,
-  },
-  gasReporter: {
-    currency: "USD",
-    showTimeSpent: true,
-    enabled: process.env.REPORT_GAS,
-    currency: "USD",
-    onlyCalledMethods: false
   },
   namedAccounts: {
     deployer: {

@@ -23,9 +23,3 @@ If you deploy a new version of `DelegateCallProxyManager.sol` without using the 
 ```
 npm run test
 ```
-
-## Gas Report
-```
-npm run node
-npm run benchmark
-```
