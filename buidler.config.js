@@ -10,8 +10,14 @@ const { randomBytes } = require('crypto');
 usePlugin("buidler-ethers-v5");
 usePlugin("buidler-deploy");
 usePlugin("solidity-coverage");
+usePlugin("@nomiclabs/buidler-etherscan");
 
 const keys = {
+  mainnet: fromPrivateKey(
+    process.env.MAINNET_PVT_KEY
+      ? Buffer.from(process.env.MAINNET_PVT_KEY.slice(2), 'hex')
+      : randomBytes(32)
+  ).getPrivateKeyString(),
   rinkeby: fromPrivateKey(
     process.env.RINKEBY_PVT_KEY
       ? Buffer.from(process.env.RINKEBY_PVT_KEY.slice(2), 'hex')
@@ -20,7 +26,6 @@ const keys = {
 
 module.exports = {
   etherscan: {
-    url: "https://api.etherscan.io/api",
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
   namedAccounts: {
@@ -39,6 +44,11 @@ module.exports = {
         port: 8546,
         hostname: "localhost",
       }),
+    },
+    mainnet: {
+      url: new InfuraProvider("mainnet", process.env.INFURA_PROJECT_ID).connection.url,
+      accounts: [keys.mainnet],
+      chainId: 1
     },
     rinkeby: {
       url: new InfuraProvider("rinkeby", process.env.INFURA_PROJECT_ID).connection.url,
