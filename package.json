@@ -6,8 +6,20 @@
     "url": "https://github.com/indexed-finance/proxies"
   },
   "files": [
-    "contracts",
-    "artifacts",
+    "contracts/CodeHashes.sol",
+    "contracts/DelegateCallProxyManager.sol",
+    "contracts/DelegateCallProxyManyToOne.sol",
+    "contracts/DelegateCallProxyOneToOne.sol",
+    "contracts/interfaces/IDelegateCallProxyManager.sol",
+    "contracts/ManyToOneImplementationHolder.sol",
+    "contracts/SaltyLib.sol",
+    "artifacts/CodeHashes.json",
+    "artifacts/DelegateCallProxyManager.json",
+    "artifacts/DelegateCallProxyManyToOne.json",
+    "artifacts/DelegateCallProxyOneToOne.json",
+    "artifacts/IDelegateCallProxyManager.json",
+    "artifacts/ManyToOneImplementationHolder.json",
+    "artifacts/SaltyLib.json",
     "deployments/rinkeby",
     "deployments/mainnet"
   ],
