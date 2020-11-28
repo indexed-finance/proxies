@@ -24,18 +24,21 @@
     "deployments/mainnet"
   ],
   "scripts": {
-    "clean-build": "rimraf ./artifacts && rimraf ./cache",
+    "clean-build": "rimraf ./artifacts && rimraf ./cache && npm run finish-build",
     "prepare-build": "npm run clean-build && buidler-verify-helper --prepare --contracts DelegateCallProxyManager",
     "finish-build": "buidler-verify-helper --clean",
+    "prepare-test": "npm run clean-build && npx buidler compile && cross-env IS_COVERAGE=true node ./scripts/write-code-hashes.js",
     "prebuild": "npm run prepare-build && buidler compile && node ./scripts/write-code-hashes.js",
     "build": "buidler compile",
     "postbuild": "npm run finish-build && echo Built sol files with updated CodeHashes",
-    "precoverage": "cross-env IS_COVERAGE=true node ./scripts/write-code-hashes.js",
+    "precoverage": "npm run prepare-test",
     "coverage": "buidler coverage --network coverage --solcoverjs ./.solcover.js",
-    "postcoverage": "node ./scripts/write-code-hashes.js",
+    "postcoverage": "npm run build",
     "deploy:rinkeby": "npm run prepare-build && buidler --network rinkeby deploy",
     "deploy:mainnet": "npm run prepare-build && buidler --network mainnet deploy",
-    "test": "buidler test"
+    "pretest": "npm run prepare-test",
+    "test": "buidler test",
+    "posttest": "npm run build"
   },
   "husky": {
     "hooks": {
@@ -56,6 +59,7 @@
     "@nomiclabs/buidler-etherscan": "^2.1.0",
     "buidler-deploy": "^0.6.0-beta.16",
     "buidler-ethers-v5": "^0.2.2",
+    "buidler-verify-helper": "^1.0.2",
     "chai": "^4.2.0",
     "chalk": "^4.1.0",
     "coveralls": "^3.1.0",
