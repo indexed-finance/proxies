@@ -12,14 +12,17 @@
     "deployments/mainnet"
   ],
   "scripts": {
-    "prebuild": "buidler compile && node ./scripts/write-code-hashes.js",
+    "clean-build": "rimraf ./artifacts && rimraf ./cache",
+    "prepare-build": "npm run clean-build && buidler-verify-helper --prepare --contracts DelegateCallProxyManager",
+    "finish-build": "buidler-verify-helper --clean",
+    "prebuild": "npm run prepare-build && buidler compile && node ./scripts/write-code-hashes.js",
     "build": "buidler compile",
-    "postbuild": "echo Built sol files with updated CodeHashes",
+    "postbuild": "npm run finish-build && echo Built sol files with updated CodeHashes",
     "precoverage": "cross-env IS_COVERAGE=true node ./scripts/write-code-hashes.js",
     "coverage": "buidler coverage --network coverage --solcoverjs ./.solcover.js",
     "postcoverage": "node ./scripts/write-code-hashes.js",
-    "deploy:rinkeby": "buidler --network rinkeby deploy",
-    "deploy:mainnet": "buidler --network mainnet deploy",
+    "deploy:rinkeby": "npm run prepare-build && buidler --network rinkeby deploy",
+    "deploy:mainnet": "npm run prepare-build && buidler --network mainnet deploy",
     "test": "buidler test"
   },
   "husky": {
@@ -52,6 +55,7 @@
     "moment": "^2.29.1",
     "prettier": "^2.0.5",
     "prettier-plugin-solidity": "^1.0.0-alpha.55",
+    "rimraf": "^3.0.2",
     "solidity-coverage": "^0.7.10",
     "solium": "^1.2.5",
     "solium-plugin-security": "^0.1.1",
