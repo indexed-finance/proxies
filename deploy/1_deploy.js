@@ -21,7 +21,7 @@ module.exports = async ({
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
 
-  const gasPrice = ((+chainId) == 1) ? 25000000000 : 1;
+  const gasPrice = ((+chainId) == 1) ? 25000000000 : 1000000000;
 
   const deploy = async (name, contractName, opts) => {
     logger.info(`Deploying ${contractName} [${name}]`);
