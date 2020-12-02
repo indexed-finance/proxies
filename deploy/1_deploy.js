@@ -14,10 +14,14 @@ const logger = {
 
 module.exports = async ({
   deployments,
-  getNamedAccounts
+  getNamedAccounts,
+  getChainId
 }) => {
   const { save } = deployments;
   const { deployer } = await getNamedAccounts();
+  const chainId = await getChainId();
+
+  const gasPrice = ((+chainId) == 1) ? 25000000000 : 1000000000;
 
   const deploy = async (name, contractName, opts) => {
     logger.info(`Deploying ${contractName} [${name}]`);
@@ -34,6 +38,7 @@ module.exports = async ({
   await deploy('DelegateCallProxyManager', 'proxyManager', {
     from: deployer,
     gas: 4000000,
+    gasPrice,
     args: []
   });
 };

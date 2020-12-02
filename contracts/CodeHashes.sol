@@ -8,7 +8,7 @@ pragma solidity ^0.6.0;
  * values when they import the salt library.
  */
 library CodeHashes {
-  bytes32 internal constant ONE_TO_ONE_CODEHASH = 0xdf533b6e999d326280ce88ca39ea2eddf95ed96f6c153ed5642d9b0a95dba4a2;
-  bytes32 internal constant MANY_TO_ONE_CODEHASH = 0x8fb4522edc5e0645a7ae5cfdbfe3b34d4a14de9e0279b74da795856b5ef4f1e6;
-  bytes32 internal constant IMPLEMENTATION_HOLDER_CODEHASH = 0xfc7aed17e5c5d36a15e443235cb9c59bae4a013202cde6ab3e657fa1176d7f3e;
+  bytes32 internal constant ONE_TO_ONE_CODEHASH = 0x63d9f7b5931b69188c8f6b806606f25892f1bb17b7f7e966fe3a32c04493aee4;
+  bytes32 internal constant MANY_TO_ONE_CODEHASH = 0xa035ad05a1663db5bfd455b99cd7c6ac6bd49269738458eda140e0b78ed53f79;
+  bytes32 internal constant IMPLEMENTATION_HOLDER_CODEHASH = 0x11c370493a726a0ffa93d42b399ad046f1b5a543b6e72f1a64f1488dc1c58f2c;
 }
