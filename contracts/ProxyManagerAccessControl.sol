@@ -72,6 +72,7 @@ contract ProxyManagerAccessControl is IProxyManagerAccessControl, Ownable {
    */
   function grantAdminAccess(address admin) external override onlyOwner {
     hasAdminAccess[admin] = true;
+    emit AdminAccessGranted(admin);
   }
 
   /**
@@ -79,6 +80,7 @@ contract ProxyManagerAccessControl is IProxyManagerAccessControl, Ownable {
    */
   function revokeAdminAccess(address admin) external override onlyOwner {
     hasAdminAccess[admin] = false;
+    emit AdminAccessRevoked(admin);
   }
 
   /**
