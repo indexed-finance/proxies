@@ -43,4 +43,4 @@ module.exports = async ({
   });
 };
 
-module.exports.tags = ['Core'];
+module.exports.tags = ['DelegateCallProxyManager'];
