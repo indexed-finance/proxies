@@ -28,7 +28,7 @@ contract ProxyManagerAccessControl is IProxyManagerAccessControl, Ownable {
     proxyManager = proxyManager_;
   }
 
-/* ==========  Controls  ========== */
+/* ==========  Admin Controls  ========== */
 
   /**
    * @dev Allows `deployer` to deploy many-to-one proxies.
@@ -36,29 +36,6 @@ contract ProxyManagerAccessControl is IProxyManagerAccessControl, Ownable {
   function approveDeployer(address deployer) external override onlyAdminOrOwner {
     IDelegateCallProxyManager(proxyManager).approveDeployer(deployer);
   }
-
-  /**
-   * @dev Prevents `deployer` from deploying many-to-one proxies.
-   */
-  function revokeDeployerApproval(address deployer) external override onlyOwner {
-    IDelegateCallProxyManager(proxyManager).revokeDeployerApproval(deployer);
-  }
-
-  /**
-   * @dev Grants admin access to `admin`.
-   */
-  function grantAdminAccess(address admin) external override onlyOwner {
-    hasAdminAccess[admin] = true;
-  }
-
-  /**
-   * @dev Revokes admin access from `admin`.
-   */
-  function revokeAdminAccess(address admin) external override onlyOwner {
-    hasAdminAccess[admin] = false;
-  }
-
-/* ==========  Admin Controls  ========== */
 
   /**
    * @dev Creates a many-to-one proxy relationship.
@@ -88,54 +65,27 @@ contract ProxyManagerAccessControl is IProxyManagerAccessControl, Ownable {
     );
   }
 
+/* ==========  Owner Controls  ========== */
+
   /**
-   * @dev Deploy a proxy contract with a one-to-one relationship
-   * with its implementation.
-   *
-   * The proxy will have its own implementation address which can
-   * be updated by the proxy manager.
-   *
-   * @param suppliedSalt Salt provided by the account requesting deployment.
-   * @param implementation Address of the contract with the runtime
-   * code that the proxy should use.
+   * @dev Grants admin access to `admin`.
    */
-  function deployProxyOneToOne(
-    bytes32 suppliedSalt,
-    address implementation
-  )
-    external
-    override
-    onlyAdminOrOwner
-    returns(address)
-  {
-    return IDelegateCallProxyManager(proxyManager).deployProxyOneToOne(
-      suppliedSalt,
-      implementation
-    );
+  function grantAdminAccess(address admin) external override onlyOwner {
+    hasAdminAccess[admin] = true;
   }
 
   /**
-   * @dev Deploy a proxy with a many-to-one relationship with its implemenation.
-   *
-   * The proxy will call the implementation holder for every transaction to
-   * determine the address to use in calls.
-   *
-   * @param implementationID Identifier for the proxy's implementation.
-   * @param suppliedSalt Salt provided by the account requesting deployment.
+   * @dev Revokes admin access from `admin`.
    */
-  function deployProxyManyToOne(
-    bytes32 implementationID,
-    bytes32 suppliedSalt
-  )
-    external
-    override
-    onlyAdminOrOwner
-    returns(address proxyAddress)
-  {
-    return IDelegateCallProxyManager(proxyManager).deployProxyManyToOne(
-      implementationID,
-      suppliedSalt
-    );
+  function revokeAdminAccess(address admin) external override onlyOwner {
+    hasAdminAccess[admin] = false;
+  }
+
+  /**
+   * @dev Prevents `deployer` from deploying many-to-one proxies.
+   */
+  function revokeDeployerApproval(address deployer) external override onlyOwner {
+    IDelegateCallProxyManager(proxyManager).revokeDeployerApproval(deployer);
   }
 
   /**
@@ -212,6 +162,62 @@ contract ProxyManagerAccessControl is IProxyManagerAccessControl, Ownable {
     );
   }
 
-  /* ==========  Proxy Deployment  ========== */
+  /**
+   * @dev Transfers ownership of the proxy manager to a new account.
+   */
+  function transferManagerOwnership(address newOwner) external override onlyOwner {
+    Ownable(proxyManager).transferOwnership(newOwner);
+  }
 
+/* ==========  Proxy Deployment  ========== */
+
+  /**
+   * @dev Deploy a proxy contract with a one-to-one relationship
+   * with its implementation.
+   *
+   * The proxy will have its own implementation address which can
+   * be updated by the proxy manager.
+   *
+   * @param suppliedSalt Salt provided by the account requesting deployment.
+   * @param implementation Address of the contract with the runtime
+   * code that the proxy should use.
+   */
+  function deployProxyOneToOne(
+    bytes32 suppliedSalt,
+    address implementation
+  )
+    external
+    override
+    onlyAdminOrOwner
+    returns(address)
+  {
+    return IDelegateCallProxyManager(proxyManager).deployProxyOneToOne(
+      suppliedSalt,
+      implementation
+    );
+  }
+
+  /**
+   * @dev Deploy a proxy with a many-to-one relationship with its implemenation.
+   *
+   * The proxy will call the implementation holder for every transaction to
+   * determine the address to use in calls.
+   *
+   * @param implementationID Identifier for the proxy's implementation.
+   * @param suppliedSalt Salt provided by the account requesting deployment.
+   */
+  function deployProxyManyToOne(
+    bytes32 implementationID,
+    bytes32 suppliedSalt
+  )
+    external
+    override
+    onlyAdminOrOwner
+    returns(address proxyAddress)
+  {
+    return IDelegateCallProxyManager(proxyManager).deployProxyManyToOne(
+      implementationID,
+      suppliedSalt
+    );
+  }
 }

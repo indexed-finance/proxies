@@ -41,6 +41,11 @@ interface IProxyManagerAccessControl {
    */
   function revokeAdminAccess(address admin) external;
 
+  /**
+   * @dev Transfers ownership of the proxy manager.
+   */
+  function transferManagerOwnership(address newOwner) external;
+
 /* ==========  Implementation Management  ========== */
 
   /**
