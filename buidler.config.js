@@ -11,6 +11,7 @@ usePlugin("buidler-ethers-v5");
 usePlugin("buidler-deploy");
 usePlugin("solidity-coverage");
 usePlugin("@nomiclabs/buidler-etherscan");
+usePlugin("@nomiclabs/buidler-waffle");
 
 const keys = {
   mainnet: fromPrivateKey(

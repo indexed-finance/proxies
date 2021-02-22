@@ -21,7 +21,7 @@ module.exports = async ({
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
 
-  const gasPrice = ((+chainId) == 1) ? 25000000000 : 1000000000;
+  const gasPrice = ((+chainId) == 1) ? 150000000000 : undefined;
 
   const deploy = async (name, contractName, opts) => {
     logger.info(`Deploying ${contractName} [${name}]`);
@@ -35,12 +35,14 @@ module.exports = async ({
     return deployment;
   };
 
-  await deploy('DelegateCallProxyManager', 'proxyManager', {
+  const proxyManager = '0xD23DeDC599bD56767e42D48484d6Ca96ab01C115';
+
+  await deploy('ProxyManagerAccessControl', 'accessControl', {
     from: deployer,
     gas: 4000000,
     gasPrice,
-    args: []
+    args: [proxyManager]
   });
 };
 
-module.exports.tags = ['DelegateCallProxyManager'];
+module.exports.tags = ['ProxyManagerAccessControl'];
