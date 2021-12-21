@@ -1,0 +1,493 @@
+{
+  "0x663485fb741140c835ca9db38069cde06c88c8d598731cec9e9d3cb312aadae4": {
+    "name": "ProxyManagerAccessControl",
+    "deployment": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "proxyManager_",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "newAdmin",
+              "type": "address"
+            }
+          ],
+          "name": "AdminAccessGranted",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "newAdmin",
+              "type": "address"
+            }
+          ],
+          "name": "AdminAccessRevoked",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "deployer",
+              "type": "address"
+            }
+          ],
+          "name": "approveDeployer",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "implementationID",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "implementation",
+              "type": "address"
+            }
+          ],
+          "name": "createManyToOneProxyRelationship",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "implementationID",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "suppliedSalt",
+              "type": "bytes32"
+            }
+          ],
+          "name": "deployProxyManyToOne",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "proxyAddress",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "suppliedSalt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "implementation",
+              "type": "address"
+            }
+          ],
+          "name": "deployProxyOneToOne",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "admin",
+              "type": "address"
+            }
+          ],
+          "name": "grantAdminAccess",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "hasAdminAccess",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "implementationID",
+              "type": "bytes32"
+            }
+          ],
+          "name": "lockImplementationManyToOne",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "proxyAddress",
+              "type": "address"
+            }
+          ],
+          "name": "lockImplementationOneToOne",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "owner",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "proxyManager",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "renounceOwnership",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "admin",
+              "type": "address"
+            }
+          ],
+          "name": "revokeAdminAccess",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "deployer",
+              "type": "address"
+            }
+          ],
+          "name": "revokeDeployerApproval",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "implementationID",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "implementation",
+              "type": "address"
+            }
+          ],
+          "name": "setImplementationAddressManyToOne",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "proxyAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "implementation",
+              "type": "address"
+            }
+          ],
+          "name": "setImplementationAddressOneToOne",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "transferManagerOwnership",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "transferOwnership",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ],
+      "args": [
+        "0x592f70cE43a310D15fF59BE1460F38Ab6DF3Fe65"
+      ],
+      "solcInputHash": "0x38098ff78c3a605f376f9247ea04a7e6383e67e5a2dfb2c30976b232ffafab83",
+      "solcInput": "{\n  \"language\": \"Solidity\",\n  \"sources\": {\n    \"temp-contracts/interfaces/IDelegateCallProxyManager.sol\": {\n      \"content\": \"// SPDX-License-Identifier: GPL-3.0\\npragma solidity ^0.6.0;\\n\\n\\n/**\\n * @dev Contract that manages deployment and upgrades of delegatecall proxies.\\n *\\n * An implementation identifier can be created on the proxy manager which is\\n * used to specify the logic address for a particular contract type, and to\\n * upgrade the implementation as needed.\\n *\\n * A one-to-one proxy is a single proxy contract with an upgradeable implementation\\n * address.\\n *\\n * A many-to-one proxy is a single upgradeable implementation address that may be\\n * used by many proxy contracts.\\n */\\ninterface IDelegateCallProxyManager {\\n/* ==========  Events  ========== */\\n\\n  event DeploymentApprovalGranted(address deployer);\\n  event DeploymentApprovalRevoked(address deployer);\\n\\n  event ManyToOne_ImplementationCreated(\\n    bytes32 implementationID,\\n    address implementationAddress\\n  );\\n\\n  event ManyToOne_ImplementationUpdated(\\n    bytes32 implementationID,\\n    address implementationAddress\\n  );\\n\\n  event ManyToOne_ProxyDeployed(\\n    bytes32 implementationID,\\n    address proxyAddress\\n  );\\n\\n  event OneToOne_ProxyDeployed(\\n    address proxyAddress,\\n    address implementationAddress\\n  );\\n\\n  event OneToOne_ImplementationUpdated(\\n    address proxyAddress,\\n    address implementationAddress\\n  );\\n\\n/* ==========  Controls  ========== */\\n\\n  /**\\n   * @dev Allows `deployer` to deploy many-to-one proxies.\\n   */\\n  function approveDeployer(address deployer) external;\\n\\n  /**\\n   * @dev Prevents `deployer` from deploying many-to-one proxies.\\n   */\\n  function revokeDeployerApproval(address deployer) external;\\n\\n/* ==========  Implementation Management  ========== */\\n\\n  /**\\n   * @dev Creates a many-to-one proxy relationship.\\n   *\\n   * Deploys an implementation holder contract which stores the\\n   * implementation address for many proxies. The implementation\\n   * address can be updated on the holder to change the runtime\\n   * code used by all its proxies.\\n   *\\n   * @param implementationID ID for the implementation, used to identify the\\n   * proxies that use it. Also used as the salt in the create2 call when\\n   * deploying the implementation holder contract.\\n   * @param implementation Address with the runtime code the proxies\\n   * should use.\\n   */\\n  function createManyToOneProxyRelationship(\\n    bytes32 implementationID,\\n    address implementation\\n  ) external;\\n\\n  /**\\n   * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.\\n   */\\n  function lockImplementationManyToOne(bytes32 implementationID) external;\\n\\n  /**\\n   * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.\\n   */\\n  function lockImplementationOneToOne(address proxyAddress) external;\\n\\n  /**\\n   * @dev Updates the implementation address for a many-to-one\\n   * proxy relationship.\\n   *\\n   * @param implementationID Identifier for the implementation.\\n   * @param implementation Address with the runtime code the proxies\\n   * should use.\\n   */\\n  function setImplementationAddressManyToOne(\\n    bytes32 implementationID,\\n    address implementation\\n  ) external;\\n\\n  /**\\n   * @dev Updates the implementation address for a one-to-one proxy.\\n   *\\n   * Note: This could work for many-to-one as well if the caller\\n   * provides the implementation holder address in place of the\\n   * proxy address, as they use the same access control and update\\n   * mechanism.\\n   *\\n   * @param proxyAddress Address of the deployed proxy\\n   * @param implementation Address with the runtime code for\\n   * the proxy to use.\\n   */\\n  function setImplementationAddressOneToOne(\\n    address proxyAddress,\\n    address implementation\\n  ) external;\\n\\n/* ==========  Proxy Deployment  ========== */\\n\\n  /**\\n   * @dev Deploy a proxy contract with a one-to-one relationship\\n   * with its implementation.\\n   *\\n   * The proxy will have its own implementation address which can\\n   * be updated by the proxy manager.\\n   *\\n   * @param suppliedSalt Salt provided by the account requesting deployment.\\n   * @param implementation Address of the contract with the runtime\\n   * code that the proxy should use.\\n   */\\n  function deployProxyOneToOne(\\n    bytes32 suppliedSalt,\\n    address implementation\\n  ) external returns(address proxyAddress);\\n\\n  /**\\n   * @dev Deploy a proxy with a many-to-one relationship with its implemenation.\\n   *\\n   * The proxy will call the implementation holder for every transaction to\\n   * determine the address to use in calls.\\n   *\\n   * @param implementationID Identifier for the proxy's implementation.\\n   * @param suppliedSalt Salt provided by the account requesting deployment.\\n   */\\n  function deployProxyManyToOne(\\n    bytes32 implementationID,\\n    bytes32 suppliedSalt\\n  ) external returns(address proxyAddress);\\n\\n/* ==========  Queries  ========== */\\n\\n  /**\\n   * @dev Returns a boolean stating whether `implementationID` is locked.\\n   */\\n  function isImplementationLocked(bytes32 implementationID) external view returns (bool);\\n\\n  /**\\n   * @dev Returns a boolean stating whether `proxyAddress` is locked.\\n   */\\n  function isImplementationLocked(address proxyAddress) external view returns (bool);\\n\\n  /**\\n   * @dev Returns a boolean stating whether `deployer` is allowed to deploy many-to-one\\n   * proxies.\\n   */\\n  function isApprovedDeployer(address deployer) external view returns (bool);\\n\\n  /**\\n   * @dev Queries the temporary storage value `_implementationHolder`.\\n   * This is used in the constructor of the many-to-one proxy contract\\n   * so that the create2 address is static (adding constructor arguments\\n   * would change the codehash) and the implementation holder can be\\n   * stored as a constant.\\n   */\\n  function getImplementationHolder() external view returns (address);\\n\\n  /**\\n   * @dev Returns the address of the implementation holder contract\\n   * for `implementationID`.\\n   */\\n  function getImplementationHolder(bytes32 implementationID) external view returns (address);\\n\\n  /**\\n   * @dev Computes the create2 address for a one-to-one proxy requested\\n   * by `originator` using `suppliedSalt`.\\n   *\\n   * @param originator Address of the account requesting deployment.\\n   * @param suppliedSalt Salt provided by the account requesting deployment.\\n   */\\n  function computeProxyAddressOneToOne(\\n    address originator,\\n    bytes32 suppliedSalt\\n  ) external view returns (address);\\n\\n  /**\\n   * @dev Computes the create2 address for a many-to-one proxy for the\\n   * implementation `implementationID` requested by `originator` using\\n   * `suppliedSalt`.\\n   *\\n   * @param originator Address of the account requesting deployment.\\n   * @param implementationID The identifier for the contract implementation.\\n   * @param suppliedSalt Salt provided by the account requesting deployment.\\n  */\\n  function computeProxyAddressManyToOne(\\n    address originator,\\n    bytes32 implementationID,\\n    bytes32 suppliedSalt\\n  ) external view returns (address);\\n\\n  /**\\n   * @dev Computes the create2 address of the implementation holder\\n   * for `implementationID`.\\n   *\\n   * @param implementationID The identifier for the contract implementation.\\n  */\\n  function computeHolderAddressManyToOne(bytes32 implementationID) external view returns (address);\\n}\"\n    },\n    \"temp-contracts/interfaces/IProxyManagerAccessControl.sol\": {\n      \"content\": \"// SPDX-License-Identifier: GPL-3.0\\npragma solidity ^0.6.0;\\n\\n\\ninterface IProxyManagerAccessControl {\\n/* ==========  Events  ========== */\\n\\n  event AdminAccessGranted(address newAdmin);\\n  event AdminAccessRevoked(address newAdmin);\\n\\n/* ==========  Queries  ========== */\\n  /**\\n   * @dev Checks whether `account` has administrator access.\\n   */\\n  function hasAdminAccess(address account) external view returns (bool);\\n\\n  /**\\n   * @dev Gets the address of the proxy manager.\\n   */\\n  function proxyManager() external view returns (address);\\n\\n/* ==========  Controls  ========== */\\n\\n  /**\\n   * @dev Allows `deployer` to deploy many-to-one proxies.\\n   */\\n  function approveDeployer(address deployer) external;\\n\\n  /**\\n   * @dev Prevents `deployer` from deploying many-to-one proxies.\\n   */\\n  function revokeDeployerApproval(address deployer) external;\\n\\n  /**\\n   * @dev Grants admin access to `admin`.\\n   */\\n  function grantAdminAccess(address admin) external;\\n\\n  /**\\n   * @dev Revokes admin access from `admin`.\\n   */\\n  function revokeAdminAccess(address admin) external;\\n\\n  /**\\n   * @dev Transfers ownership of the proxy manager.\\n   */\\n  function transferManagerOwnership(address newOwner) external;\\n\\n/* ==========  Implementation Management  ========== */\\n\\n  /**\\n   * @dev Creates a many-to-one proxy relationship.\\n   *\\n   * Deploys an implementation holder contract which stores the\\n   * implementation address for many proxies. The implementation\\n   * address can be updated on the holder to change the runtime\\n   * code used by all its proxies.\\n   *\\n   * @param implementationID ID for the implementation, used to identify the\\n   * proxies that use it. Also used as the salt in the create2 call when\\n   * deploying the implementation holder contract.\\n   * @param implementation Address with the runtime code the proxies\\n   * should use.\\n   */\\n  function createManyToOneProxyRelationship(\\n    bytes32 implementationID,\\n    address implementation\\n  ) external;\\n\\n  /**\\n   * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.\\n   */\\n  function lockImplementationManyToOne(bytes32 implementationID) external;\\n\\n  /**\\n   * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.\\n   */\\n  function lockImplementationOneToOne(address proxyAddress) external;\\n\\n  /**\\n   * @dev Updates the implementation address for a many-to-one\\n   * proxy relationship.\\n   *\\n   * @param implementationID Identifier for the implementation.\\n   * @param implementation Address with the runtime code the proxies\\n   * should use.\\n   */\\n  function setImplementationAddressManyToOne(\\n    bytes32 implementationID,\\n    address implementation\\n  ) external;\\n\\n  /**\\n   * @dev Updates the implementation address for a one-to-one proxy.\\n   *\\n   * Note: This could work for many-to-one as well if the caller\\n   * provides the implementation holder address in place of the\\n   * proxy address, as they use the same access control and update\\n   * mechanism.\\n   *\\n   * @param proxyAddress Address of the deployed proxy\\n   * @param implementation Address with the runtime code for\\n   * the proxy to use.\\n   */\\n  function setImplementationAddressOneToOne(\\n    address proxyAddress,\\n    address implementation\\n  ) external;\\n\\n  /* ==========  Proxy Deployment  ========== */\\n\\n  /**\\n   * @dev Deploy a proxy contract with a one-to-one relationship\\n   * with its implementation.\\n   *\\n   * The proxy will have its own implementation address which can\\n   * be updated by the proxy manager.\\n   *\\n   * @param suppliedSalt Salt provided by the account requesting deployment.\\n   * @param implementation Address of the contract with the runtime\\n   * code that the proxy should use.\\n   */\\n  function deployProxyOneToOne(\\n    bytes32 suppliedSalt,\\n    address implementation\\n  ) external returns(address proxyAddress);\\n\\n  /**\\n   * @dev Deploy a proxy with a many-to-one relationship with its implemenation.\\n   *\\n   * The proxy will call the implementation holder for every transaction to\\n   * determine the address to use in calls.\\n   *\\n   * @param implementationID Identifier for the proxy's implementation.\\n   * @param suppliedSalt Salt provided by the account requesting deployment.\\n   */\\n  function deployProxyManyToOne(\\n    bytes32 implementationID,\\n    bytes32 suppliedSalt\\n  ) external returns(address proxyAddress);\\n}\"\n    },\n    \"temp-contracts/ProxyManagerAccessControl.sol\": {\n      \"content\": \"// SPDX-License-Identifier: GPL-3.0\\npragma solidity =0.6.12;\\n\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\nimport \\\"./interfaces/IProxyManagerAccessControl.sol\\\";\\nimport \\\"./interfaces/IDelegateCallProxyManager.sol\\\";\\n\\n\\ncontract ProxyManagerAccessControl is IProxyManagerAccessControl, Ownable {\\n/* ==========  Storage  ========== */\\n\\n  mapping (address => bool) public override hasAdminAccess;\\n  address public immutable override proxyManager;\\n\\n/* ==========  Modifiers  ========== */\\n\\n  modifier onlyAdminOrOwner {\\n    require(\\n      hasAdminAccess[msg.sender] || msg.sender == owner(),\\n      \\\"ERR_NOT_ADMIN_OR_OWNER\\\"\\n    );\\n    _;\\n  }\\n\\n/* ==========  Constructor  ========== */\\n\\n  constructor(address proxyManager_) public Ownable() {\\n    proxyManager = proxyManager_;\\n  }\\n\\n/* ==========  Admin Controls  ========== */\\n\\n  /**\\n   * @dev Allows `deployer` to deploy many-to-one proxies.\\n   */\\n  function approveDeployer(address deployer) external override onlyAdminOrOwner {\\n    IDelegateCallProxyManager(proxyManager).approveDeployer(deployer);\\n  }\\n\\n  /**\\n   * @dev Creates a many-to-one proxy relationship.\\n   *\\n   * Deploys an implementation holder contract which stores the\\n   * implementation address for many proxies. The implementation\\n   * address can be updated on the holder to change the runtime\\n   * code used by all its proxies.\\n   *\\n   * @param implementationID ID for the implementation, used to identify the\\n   * proxies that use it. Also used as the salt in the create2 call when\\n   * deploying the implementation holder contract.\\n   * @param implementation Address with the runtime code the proxies\\n   * should use.\\n   */\\n  function createManyToOneProxyRelationship(\\n    bytes32 implementationID,\\n    address implementation\\n  )\\n    external\\n    override\\n    onlyAdminOrOwner\\n  {\\n    IDelegateCallProxyManager(proxyManager).createManyToOneProxyRelationship(\\n      implementationID,\\n      implementation\\n    );\\n  }\\n\\n/* ==========  Owner Controls  ========== */\\n\\n  /**\\n   * @dev Grants admin access to `admin`.\\n   */\\n  function grantAdminAccess(address admin) external override onlyOwner {\\n    hasAdminAccess[admin] = true;\\n    emit AdminAccessGranted(admin);\\n  }\\n\\n  /**\\n   * @dev Revokes admin access from `admin`.\\n   */\\n  function revokeAdminAccess(address admin) external override onlyOwner {\\n    hasAdminAccess[admin] = false;\\n    emit AdminAccessRevoked(admin);\\n  }\\n\\n  /**\\n   * @dev Prevents `deployer` from deploying many-to-one proxies.\\n   */\\n  function revokeDeployerApproval(address deployer) external override onlyOwner {\\n    IDelegateCallProxyManager(proxyManager).revokeDeployerApproval(deployer);\\n  }\\n\\n  /**\\n   * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.\\n   */\\n  function lockImplementationManyToOne(bytes32 implementationID)\\n    external\\n    override\\n    onlyOwner\\n  {\\n    IDelegateCallProxyManager(proxyManager).lockImplementationManyToOne(\\n      implementationID\\n    );\\n  }\\n\\n  /**\\n   * @dev Lock the current implementation for `proxyAddress` so that it can never be upgraded again.\\n   */\\n  function lockImplementationOneToOne(address proxyAddress)\\n    external\\n    override\\n    onlyOwner\\n  {\\n    IDelegateCallProxyManager(proxyManager).lockImplementationOneToOne(\\n      proxyAddress\\n    );\\n  }\\n\\n  /**\\n   * @dev Updates the implementation address for a many-to-one\\n   * proxy relationship.\\n   *\\n   * @param implementationID Identifier for the implementation.\\n   * @param implementation Address with the runtime code the proxies\\n   * should use.\\n   */\\n  function setImplementationAddressManyToOne(\\n    bytes32 implementationID,\\n    address implementation\\n  )\\n    external\\n    override\\n    onlyOwner\\n  {\\n    IDelegateCallProxyManager(proxyManager).setImplementationAddressManyToOne(\\n      implementationID,\\n      implementation\\n    );\\n  }\\n\\n  /**\\n   * @dev Updates the implementation address for a one-to-one proxy.\\n   *\\n   * Note: This could work for many-to-one as well if the caller\\n   * provides the implementation holder address in place of the\\n   * proxy address, as they use the same access control and update\\n   * mechanism.\\n   *\\n   * @param proxyAddress Address of the deployed proxy\\n   * @param implementation Address with the runtime code for\\n   * the proxy to use.\\n   */\\n  function setImplementationAddressOneToOne(\\n    address proxyAddress,\\n    address implementation\\n  )\\n    external\\n    override\\n    onlyOwner\\n  {\\n    IDelegateCallProxyManager(proxyManager).setImplementationAddressOneToOne(\\n      proxyAddress,\\n      implementation\\n    );\\n  }\\n\\n  /**\\n   * @dev Transfers ownership of the proxy manager to a new account.\\n   */\\n  function transferManagerOwnership(address newOwner) external override onlyOwner {\\n    Ownable(proxyManager).transferOwnership(newOwner);\\n  }\\n\\n/* ==========  Proxy Deployment  ========== */\\n\\n  /**\\n   * @dev Deploy a proxy contract with a one-to-one relationship\\n   * with its implementation.\\n   *\\n   * The proxy will have its own implementation address which can\\n   * be updated by the proxy manager.\\n   *\\n   * @param suppliedSalt Salt provided by the account requesting deployment.\\n   * @param implementation Address of the contract with the runtime\\n   * code that the proxy should use.\\n   */\\n  function deployProxyOneToOne(\\n    bytes32 suppliedSalt,\\n    address implementation\\n  )\\n    external\\n    override\\n    onlyAdminOrOwner\\n    returns(address)\\n  {\\n    return IDelegateCallProxyManager(proxyManager).deployProxyOneToOne(\\n      suppliedSalt,\\n      implementation\\n    );\\n  }\\n\\n  /**\\n   * @dev Deploy a proxy with a many-to-one relationship with its implemenation.\\n   *\\n   * The proxy will call the implementation holder for every transaction to\\n   * determine the address to use in calls.\\n   *\\n   * @param implementationID Identifier for the proxy's implementation.\\n   * @param suppliedSalt Salt provided by the account requesting deployment.\\n   */\\n  function deployProxyManyToOne(\\n    bytes32 implementationID,\\n    bytes32 suppliedSalt\\n  )\\n    external\\n    override\\n    onlyAdminOrOwner\\n    returns(address proxyAddress)\\n  {\\n    return IDelegateCallProxyManager(proxyManager).deployProxyManyToOne(\\n      implementationID,\\n      suppliedSalt\\n    );\\n  }\\n}\"\n    },\n    \"@openzeppelin/contracts/access/Ownable.sol\": {\n      \"content\": \"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.6.0;\\n\\nimport \\\"../GSN/Context.sol\\\";\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\ncontract Ownable is Context {\\n    address private _owner;\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the deployer as the initial owner.\\n     */\\n    constructor () internal {\\n        address msgSender = _msgSender();\\n        _owner = msgSender;\\n        emit OwnershipTransferred(address(0), msgSender);\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        require(_owner == _msgSender(), \\\"Ownable: caller is not the owner\\\");\\n        _;\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions anymore. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby removing any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        emit OwnershipTransferred(_owner, address(0));\\n        _owner = address(0);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        require(newOwner != address(0), \\\"Ownable: new owner is the zero address\\\");\\n        emit OwnershipTransferred(_owner, newOwner);\\n        _owner = newOwner;\\n    }\\n}\\n\"\n    },\n    \"@openzeppelin/contracts/GSN/Context.sol\": {\n      \"content\": \"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.6.0;\\n\\n/*\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with GSN meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address payable) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes memory) {\\n        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691\\n        return msg.data;\\n    }\\n}\\n\"\n    }\n  },\n  \"settings\": {\n    \"metadata\": {\n      \"useLiteralContent\": false\n    },\n    \"optimizer\": {\n      \"enabled\": true,\n      \"runs\": 200\n    },\n    \"outputSelection\": {\n      \"*\": {\n        \"*\": [\n          \"abi\",\n          \"evm.bytecode\",\n          \"evm.deployedBytecode\",\n          \"evm.methodIdentifiers\",\n          \"metadata\",\n          \"devdoc\",\n          \"userdoc\",\n          \"storageLayout\",\n          \"evm.gasEstimates\"\n        ],\n        \"\": [\n          \"id\",\n          \"ast\"\n        ]\n      }\n    }\n  }\n}",
+      "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"proxyManager_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"AdminAccessGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"AdminAccessRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"deployer\",\"type\":\"address\"}],\"name\":\"approveDeployer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"implementationID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"createManyToOneProxyRelationship\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"implementationID\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"suppliedSalt\",\"type\":\"bytes32\"}],\"name\":\"deployProxyManyToOne\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"proxyAddress\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"suppliedSalt\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"deployProxyOneToOne\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"}],\"name\":\"grantAdminAccess\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"hasAdminAccess\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"implementationID\",\"type\":\"bytes32\"}],\"name\":\"lockImplementationManyToOne\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"proxyAddress\",\"type\":\"address\"}],\"name\":\"lockImplementationOneToOne\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proxyManager\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"}],\"name\":\"revokeAdminAccess\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"deployer\",\"type\":\"address\"}],\"name\":\"revokeDeployerApproval\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"implementationID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"setImplementationAddressManyToOne\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"proxyAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"setImplementationAddressOneToOne\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferManagerOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"approveDeployer(address)\":{\"details\":\"Allows `deployer` to deploy many-to-one proxies.\"},\"createManyToOneProxyRelationship(bytes32,address)\":{\"details\":\"Creates a many-to-one proxy relationship. Deploys an implementation holder contract which stores the implementation address for many proxies. The implementation address can be updated on the holder to change the runtime code used by all its proxies.\",\"params\":{\"implementation\":\"Address with the runtime code the proxies should use.\",\"implementationID\":\"ID for the implementation, used to identify the proxies that use it. Also used as the salt in the create2 call when deploying the implementation holder contract.\"}},\"deployProxyManyToOne(bytes32,bytes32)\":{\"details\":\"Deploy a proxy with a many-to-one relationship with its implemenation. The proxy will call the implementation holder for every transaction to determine the address to use in calls.\",\"params\":{\"implementationID\":\"Identifier for the proxy's implementation.\",\"suppliedSalt\":\"Salt provided by the account requesting deployment.\"}},\"deployProxyOneToOne(bytes32,address)\":{\"details\":\"Deploy a proxy contract with a one-to-one relationship with its implementation. The proxy will have its own implementation address which can be updated by the proxy manager.\",\"params\":{\"implementation\":\"Address of the contract with the runtime code that the proxy should use.\",\"suppliedSalt\":\"Salt provided by the account requesting deployment.\"}},\"grantAdminAccess(address)\":{\"details\":\"Grants admin access to `admin`.\"},\"lockImplementationManyToOne(bytes32)\":{\"details\":\"Lock the current implementation for `proxyAddress` so that it can never be upgraded again.\"},\"lockImplementationOneToOne(address)\":{\"details\":\"Lock the current implementation for `proxyAddress` so that it can never be upgraded again.\"},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"revokeAdminAccess(address)\":{\"details\":\"Revokes admin access from `admin`.\"},\"revokeDeployerApproval(address)\":{\"details\":\"Prevents `deployer` from deploying many-to-one proxies.\"},\"setImplementationAddressManyToOne(bytes32,address)\":{\"details\":\"Updates the implementation address for a many-to-one proxy relationship.\",\"params\":{\"implementation\":\"Address with the runtime code the proxies should use.\",\"implementationID\":\"Identifier for the implementation.\"}},\"setImplementationAddressOneToOne(address,address)\":{\"details\":\"Updates the implementation address for a one-to-one proxy. Note: This could work for many-to-one as well if the caller provides the implementation holder address in place of the proxy address, as they use the same access control and update mechanism.\",\"params\":{\"implementation\":\"Address with the runtime code for the proxy to use.\",\"proxyAddress\":\"Address of the deployed proxy\"}},\"transferManagerOwnership(address)\":{\"details\":\"Transfers ownership of the proxy manager to a new account.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"stateVariables\":{\"hasAdminAccess\":{\"details\":\"Checks whether `account` has administrator access.\"},\"proxyManager\":{\"details\":\"Gets the address of the proxy manager.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"temp-contracts/ProxyManagerAccessControl.sol\":\"ProxyManagerAccessControl\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/GSN/Context.sol\":{\"keccak256\":\"0xdb26cbf4d028490f49831a7865c2fe1b28db44b535ca8d343785a3b768aae183\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://840b14ce0315c47d49ba328f1f9fa7654ded1c9e1559e6c5e777a7b2dc28bf0a\",\"dweb:/ipfs/QmTLLabn4wcfGro9LEmUXUN2nwKqZSotXMvjDCLXEnLtZP\"]},\"@openzeppelin/contracts/access/Ownable.sol\":{\"keccak256\":\"0x4bd6402ca6b3419008c2b482aff54e66836e8cb4eba2680e42ac5884ae6424fc\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8f9f711fb8d0d92aeea1c327e3845d13ca1fa8f142e47f8723cd5b3106fb29a3\",\"dweb:/ipfs/QmVQUReDW9f4zGqhizwHnyU8EntMs95tbASdqkGncnikba\"]},\"temp-contracts/ProxyManagerAccessControl.sol\":{\"keccak256\":\"0xc52f1ec8b92fc1c7a6331d2511531c827bdd6f6e6f354d90a518afca0aa5f85a\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://ffb23957a7b517fd4b7aea89200256501367fb028f8a138d45dd48ae8e5434fc\",\"dweb:/ipfs/QmTXrnxJC1KGsh6bazKqHgNxpk4Be3FGEoAhW2ib4SEXsG\"]},\"temp-contracts/interfaces/IDelegateCallProxyManager.sol\":{\"keccak256\":\"0x24f7aa01dd4c8592b889d6d81badd244ad9e602232406be5941413418d171421\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://3edfca6e8b608f4e4fd2c86a3eb3146202f9bfd7f26ff4608172894313ea911d\",\"dweb:/ipfs/QmdSvcGykCzAgfkyzofX6DEwbtFnAtjtnb9KddA7YJVtHZ\"]},\"temp-contracts/interfaces/IProxyManagerAccessControl.sol\":{\"keccak256\":\"0x7c2d49abd87a7955a200b3cd37c6572463ec73250352d2e2d8baf8e5a45a27f0\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://4eee229def2ef852ba8a6bacdedafab38863f0081b627dc95bad71721f0a9969\",\"dweb:/ipfs/QmckEYCHhwdrYgn6NJpbSGXHytdFxsu1uzbhMwHo3HdkYd\"]}},\"version\":1}",
+      "bytecode": "0x60a060405234801561001057600080fd5b506040516111223803806111228339818101604052602081101561003357600080fd5b5051600061003f61009e565b600080546001600160a01b0319166001600160a01b0383169081178255604051929350917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a35060601b6001600160601b0319166080526100a2565b3390565b60805160601c6110316100f1600039806103fe52806104f75280610699528061078852806108ff52806109f35280610b935280610c0a5280610c865280610d555280610f3c52506110316000f3fe608060405234801561001057600080fd5b506004361061010b5760003560e01c80636daf5035116100a257806396b4ca701161007157806396b4ca70146102d0578063c3242d6b146102d8578063db97034014610304578063f2fde38b1461032a578063f9628542146103505761010b565b80636daf50351461026e578063715018a6146102945780638da5cb5b1461029c578063964c4061146102a45761010b565b806354dad46e116100de57806354dad46e146101ce5780635b54cf96146101f45780635fe6416e1461021a5780636813a3c2146102405761010b565b80631a5e5bc5146101105780632275a8301461014f57806322b3127a1461016e5780634842b3c414610194575b600080fd5b6101336004803603604081101561012657600080fd5b508035906020013561037c565b604080516001600160a01b039092168252519081900360200190f35b61016c6004803603602081101561016557600080fd5b503561049d565b005b61016c6004803603602081101561018457600080fd5b50356001600160a01b0316610576565b6101ba600480360360208110156101aa57600080fd5b50356001600160a01b031661062a565b604080519115158252519081900360200190f35b61016c600480360360208110156101e457600080fd5b50356001600160a01b031661063f565b61016c6004803603602081101561020a57600080fd5b50356001600160a01b0316610706565b61016c6004803603602081101561023057600080fd5b50356001600160a01b03166107f5565b61016c6004803603604081101561025657600080fd5b506001600160a01b03813581169160200135166108a5565b61016c6004803603602081101561028457600080fd5b50356001600160a01b0316610999565b61016c610a60565b610133610b02565b61016c600480360360408110156102ba57600080fd5b50803590602001356001600160a01b0316610b11565b610133610c08565b61016c600480360360408110156102ee57600080fd5b50803590602001356001600160a01b0316610c2c565b61016c6004803603602081101561031a57600080fd5b50356001600160a01b0316610cfb565b61016c6004803603602081101561034057600080fd5b50356001600160a01b0316610dc2565b6101336004803603604081101561036657600080fd5b50803590602001356001600160a01b0316610eba565b3360009081526001602052604081205460ff16806103b2575061039d610b02565b6001600160a01b0316336001600160a01b0316145b6103fc576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316631a5e5bc584846040518363ffffffff1660e01b81526004018083815260200182815260200192505050602060405180830381600087803b15801561046a57600080fd5b505af115801561047e573d6000803e3d6000fd5b505050506040513d602081101561049457600080fd5b50519392505050565b6104a5610fb1565b6000546001600160a01b039081169116146104f5576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316632275a830826040518263ffffffff1660e01b815260040180828152602001915050600060405180830381600087803b15801561055b57600080fd5b505af115801561056f573d6000803e3d6000fd5b5050505050565b61057e610fb1565b6000546001600160a01b039081169116146105ce576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b6001600160a01b038116600081815260016020818152604092839020805460ff1916909217909155815192835290517fc36befb96151814c16fe0d20f29a5912794cda96453e57ab00edad0bb21d50fa9281900390910190a150565b60016020526000908152604090205460ff1681565b610647610fb1565b6000546001600160a01b03908116911614610697576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663f2fde38b826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b3360009081526001602052604090205460ff168061073c5750610727610b02565b6001600160a01b0316336001600160a01b0316145b610786576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316635b54cf96826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b6107fd610fb1565b6000546001600160a01b0390811691161461084d576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b6001600160a01b038116600081815260016020908152604091829020805460ff19169055815192835290517f998b1c8c2c4e47baeddde4d4152dfae31548fb5e6aa5fc2026808fa365a30e7c9281900390910190a150565b6108ad610fb1565b6000546001600160a01b039081169116146108fd576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316636813a3c283836040518363ffffffff1660e01b815260040180836001600160a01b03168152602001826001600160a01b0316815260200192505050600060405180830381600087803b15801561097d57600080fd5b505af1158015610991573d6000803e3d6000fd5b505050505050565b6109a1610fb1565b6000546001600160a01b039081169116146109f1576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316636daf5035826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b610a68610fb1565b6000546001600160a01b03908116911614610ab8576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b6000546001600160a01b031690565b3360009081526001602052604090205460ff1680610b475750610b32610b02565b6001600160a01b0316336001600160a01b0316145b610b91576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663964c406183836040518363ffffffff1660e01b815260040180838152602001826001600160a01b0316815260200192505050600060405180830381600087803b15801561097d57600080fd5b7f000000000000000000000000000000000000000000000000000000000000000081565b610c34610fb1565b6000546001600160a01b03908116911614610c84576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663c3242d6b83836040518363ffffffff1660e01b815260040180838152602001826001600160a01b0316815260200192505050600060405180830381600087803b15801561097d57600080fd5b610d03610fb1565b6000546001600160a01b03908116911614610d53576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663db970340826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b610dca610fb1565b6000546001600160a01b03908116911614610e1a576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b6001600160a01b038116610e5f5760405162461bcd60e51b8152600401808060200182810382526026815260200180610fb66026913960400191505060405180910390fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b3360009081526001602052604081205460ff1680610ef05750610edb610b02565b6001600160a01b0316336001600160a01b0316145b610f3a576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663f962854284846040518363ffffffff1660e01b815260040180838152602001826001600160a01b0316815260200192505050602060405180830381600087803b15801561046a57600080fd5b339056fe4f776e61626c653a206e6577206f776e657220697320746865207a65726f20616464726573734f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572a264697066735822122075fdd08a7afcd3480b9410b65898f6d33a45c4b9e216f5cba3d23adf989afb3164736f6c634300060c0033",
+      "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061010b5760003560e01c80636daf5035116100a257806396b4ca701161007157806396b4ca70146102d0578063c3242d6b146102d8578063db97034014610304578063f2fde38b1461032a578063f9628542146103505761010b565b80636daf50351461026e578063715018a6146102945780638da5cb5b1461029c578063964c4061146102a45761010b565b806354dad46e116100de57806354dad46e146101ce5780635b54cf96146101f45780635fe6416e1461021a5780636813a3c2146102405761010b565b80631a5e5bc5146101105780632275a8301461014f57806322b3127a1461016e5780634842b3c414610194575b600080fd5b6101336004803603604081101561012657600080fd5b508035906020013561037c565b604080516001600160a01b039092168252519081900360200190f35b61016c6004803603602081101561016557600080fd5b503561049d565b005b61016c6004803603602081101561018457600080fd5b50356001600160a01b0316610576565b6101ba600480360360208110156101aa57600080fd5b50356001600160a01b031661062a565b604080519115158252519081900360200190f35b61016c600480360360208110156101e457600080fd5b50356001600160a01b031661063f565b61016c6004803603602081101561020a57600080fd5b50356001600160a01b0316610706565b61016c6004803603602081101561023057600080fd5b50356001600160a01b03166107f5565b61016c6004803603604081101561025657600080fd5b506001600160a01b03813581169160200135166108a5565b61016c6004803603602081101561028457600080fd5b50356001600160a01b0316610999565b61016c610a60565b610133610b02565b61016c600480360360408110156102ba57600080fd5b50803590602001356001600160a01b0316610b11565b610133610c08565b61016c600480360360408110156102ee57600080fd5b50803590602001356001600160a01b0316610c2c565b61016c6004803603602081101561031a57600080fd5b50356001600160a01b0316610cfb565b61016c6004803603602081101561034057600080fd5b50356001600160a01b0316610dc2565b6101336004803603604081101561036657600080fd5b50803590602001356001600160a01b0316610eba565b3360009081526001602052604081205460ff16806103b2575061039d610b02565b6001600160a01b0316336001600160a01b0316145b6103fc576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316631a5e5bc584846040518363ffffffff1660e01b81526004018083815260200182815260200192505050602060405180830381600087803b15801561046a57600080fd5b505af115801561047e573d6000803e3d6000fd5b505050506040513d602081101561049457600080fd5b50519392505050565b6104a5610fb1565b6000546001600160a01b039081169116146104f5576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316632275a830826040518263ffffffff1660e01b815260040180828152602001915050600060405180830381600087803b15801561055b57600080fd5b505af115801561056f573d6000803e3d6000fd5b5050505050565b61057e610fb1565b6000546001600160a01b039081169116146105ce576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b6001600160a01b038116600081815260016020818152604092839020805460ff1916909217909155815192835290517fc36befb96151814c16fe0d20f29a5912794cda96453e57ab00edad0bb21d50fa9281900390910190a150565b60016020526000908152604090205460ff1681565b610647610fb1565b6000546001600160a01b03908116911614610697576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663f2fde38b826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b3360009081526001602052604090205460ff168061073c5750610727610b02565b6001600160a01b0316336001600160a01b0316145b610786576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316635b54cf96826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b6107fd610fb1565b6000546001600160a01b0390811691161461084d576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b6001600160a01b038116600081815260016020908152604091829020805460ff19169055815192835290517f998b1c8c2c4e47baeddde4d4152dfae31548fb5e6aa5fc2026808fa365a30e7c9281900390910190a150565b6108ad610fb1565b6000546001600160a01b039081169116146108fd576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316636813a3c283836040518363ffffffff1660e01b815260040180836001600160a01b03168152602001826001600160a01b0316815260200192505050600060405180830381600087803b15801561097d57600080fd5b505af1158015610991573d6000803e3d6000fd5b505050505050565b6109a1610fb1565b6000546001600160a01b039081169116146109f1576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316636daf5035826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b610a68610fb1565b6000546001600160a01b03908116911614610ab8576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b6000546001600160a01b031690565b3360009081526001602052604090205460ff1680610b475750610b32610b02565b6001600160a01b0316336001600160a01b0316145b610b91576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663964c406183836040518363ffffffff1660e01b815260040180838152602001826001600160a01b0316815260200192505050600060405180830381600087803b15801561097d57600080fd5b7f000000000000000000000000000000000000000000000000000000000000000081565b610c34610fb1565b6000546001600160a01b03908116911614610c84576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663c3242d6b83836040518363ffffffff1660e01b815260040180838152602001826001600160a01b0316815260200192505050600060405180830381600087803b15801561097d57600080fd5b610d03610fb1565b6000546001600160a01b03908116911614610d53576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663db970340826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b610dca610fb1565b6000546001600160a01b03908116911614610e1a576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b6001600160a01b038116610e5f5760405162461bcd60e51b8152600401808060200182810382526026815260200180610fb66026913960400191505060405180910390fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b3360009081526001602052604081205460ff1680610ef05750610edb610b02565b6001600160a01b0316336001600160a01b0316145b610f3a576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663f962854284846040518363ffffffff1660e01b815260040180838152602001826001600160a01b0316815260200192505050602060405180830381600087803b15801561046a57600080fd5b339056fe4f776e61626c653a206e6577206f776e657220697320746865207a65726f20616464726573734f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572a264697066735822122075fdd08a7afcd3480b9410b65898f6d33a45c4b9e216f5cba3d23adf989afb3164736f6c634300060c0033",
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      },
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "approveDeployer(address)": {
+            "details": "Allows `deployer` to deploy many-to-one proxies."
+          },
+          "createManyToOneProxyRelationship(bytes32,address)": {
+            "details": "Creates a many-to-one proxy relationship. Deploys an implementation holder contract which stores the implementation address for many proxies. The implementation address can be updated on the holder to change the runtime code used by all its proxies.",
+            "params": {
+              "implementation": "Address with the runtime code the proxies should use.",
+              "implementationID": "ID for the implementation, used to identify the proxies that use it. Also used as the salt in the create2 call when deploying the implementation holder contract."
+            }
+          },
+          "deployProxyManyToOne(bytes32,bytes32)": {
+            "details": "Deploy a proxy with a many-to-one relationship with its implemenation. The proxy will call the implementation holder for every transaction to determine the address to use in calls.",
+            "params": {
+              "implementationID": "Identifier for the proxy's implementation.",
+              "suppliedSalt": "Salt provided by the account requesting deployment."
+            }
+          },
+          "deployProxyOneToOne(bytes32,address)": {
+            "details": "Deploy a proxy contract with a one-to-one relationship with its implementation. The proxy will have its own implementation address which can be updated by the proxy manager.",
+            "params": {
+              "implementation": "Address of the contract with the runtime code that the proxy should use.",
+              "suppliedSalt": "Salt provided by the account requesting deployment."
+            }
+          },
+          "grantAdminAccess(address)": {
+            "details": "Grants admin access to `admin`."
+          },
+          "lockImplementationManyToOne(bytes32)": {
+            "details": "Lock the current implementation for `proxyAddress` so that it can never be upgraded again."
+          },
+          "lockImplementationOneToOne(address)": {
+            "details": "Lock the current implementation for `proxyAddress` so that it can never be upgraded again."
+          },
+          "owner()": {
+            "details": "Returns the address of the current owner."
+          },
+          "renounceOwnership()": {
+            "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+          },
+          "revokeAdminAccess(address)": {
+            "details": "Revokes admin access from `admin`."
+          },
+          "revokeDeployerApproval(address)": {
+            "details": "Prevents `deployer` from deploying many-to-one proxies."
+          },
+          "setImplementationAddressManyToOne(bytes32,address)": {
+            "details": "Updates the implementation address for a many-to-one proxy relationship.",
+            "params": {
+              "implementation": "Address with the runtime code the proxies should use.",
+              "implementationID": "Identifier for the implementation."
+            }
+          },
+          "setImplementationAddressOneToOne(address,address)": {
+            "details": "Updates the implementation address for a one-to-one proxy. Note: This could work for many-to-one as well if the caller provides the implementation holder address in place of the proxy address, as they use the same access control and update mechanism.",
+            "params": {
+              "implementation": "Address with the runtime code for the proxy to use.",
+              "proxyAddress": "Address of the deployed proxy"
+            }
+          },
+          "transferManagerOwnership(address)": {
+            "details": "Transfers ownership of the proxy manager to a new account."
+          },
+          "transferOwnership(address)": {
+            "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+          }
+        },
+        "stateVariables": {
+          "hasAdminAccess": {
+            "details": "Checks whether `account` has administrator access."
+          },
+          "proxyManager": {
+            "details": "Gets the address of the proxy manager."
+          }
+        },
+        "version": 1
+      },
+      "storageLayout": {
+        "storage": [
+          {
+            "astId": 30,
+            "contract": "temp-contracts/ProxyManagerAccessControl.sol:ProxyManagerAccessControl",
+            "label": "_owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 145,
+            "contract": "temp-contracts/ProxyManagerAccessControl.sol:ProxyManagerAccessControl",
+            "label": "hasAdminAccess",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_mapping(t_address,t_bool)"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "encoding": "inplace",
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "encoding": "inplace",
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "encoding": "mapping",
+            "key": "t_address",
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32",
+            "value": "t_bool"
+          }
+        }
+      },
+      "gasEstimates": {
+        "creation": {
+          "codeDepositCost": "829000",
+          "executionCost": "infinite",
+          "totalCost": "infinite"
+        },
+        "external": {
+          "approveDeployer(address)": "infinite",
+          "createManyToOneProxyRelationship(bytes32,address)": "infinite",
+          "deployProxyManyToOne(bytes32,bytes32)": "infinite",
+          "deployProxyOneToOne(bytes32,address)": "infinite",
+          "grantAdminAccess(address)": "infinite",
+          "hasAdminAccess(address)": "1226",
+          "lockImplementationManyToOne(bytes32)": "infinite",
+          "lockImplementationOneToOne(address)": "infinite",
+          "owner()": "1104",
+          "proxyManager()": "infinite",
+          "renounceOwnership()": "infinite",
+          "revokeAdminAccess(address)": "infinite",
+          "revokeDeployerApproval(address)": "infinite",
+          "setImplementationAddressManyToOne(bytes32,address)": "infinite",
+          "setImplementationAddressOneToOne(address,address)": "infinite",
+          "transferManagerOwnership(address)": "infinite",
+          "transferOwnership(address)": "infinite"
+        }
+      }
+    },
+    "decoded": {
+      "from": "0x236ECcAB8cdcfEDb099dE85c4060024bA3cE4d46",
+      "gasPrice": "0x236ECcAB8cdcfEDb099dE85c4060024bA3cE4d46",
+      "gasLimit": "971892",
+      "to": null,
+      "value": "0",
+      "nonce": 2,
+      "data": "0x60a060405234801561001057600080fd5b506040516111223803806111228339818101604052602081101561003357600080fd5b5051600061003f61009e565b600080546001600160a01b0319166001600160a01b0383169081178255604051929350917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a35060601b6001600160601b0319166080526100a2565b3390565b60805160601c6110316100f1600039806103fe52806104f75280610699528061078852806108ff52806109f35280610b935280610c0a5280610c865280610d555280610f3c52506110316000f3fe608060405234801561001057600080fd5b506004361061010b5760003560e01c80636daf5035116100a257806396b4ca701161007157806396b4ca70146102d0578063c3242d6b146102d8578063db97034014610304578063f2fde38b1461032a578063f9628542146103505761010b565b80636daf50351461026e578063715018a6146102945780638da5cb5b1461029c578063964c4061146102a45761010b565b806354dad46e116100de57806354dad46e146101ce5780635b54cf96146101f45780635fe6416e1461021a5780636813a3c2146102405761010b565b80631a5e5bc5146101105780632275a8301461014f57806322b3127a1461016e5780634842b3c414610194575b600080fd5b6101336004803603604081101561012657600080fd5b508035906020013561037c565b604080516001600160a01b039092168252519081900360200190f35b61016c6004803603602081101561016557600080fd5b503561049d565b005b61016c6004803603602081101561018457600080fd5b50356001600160a01b0316610576565b6101ba600480360360208110156101aa57600080fd5b50356001600160a01b031661062a565b604080519115158252519081900360200190f35b61016c600480360360208110156101e457600080fd5b50356001600160a01b031661063f565b61016c6004803603602081101561020a57600080fd5b50356001600160a01b0316610706565b61016c6004803603602081101561023057600080fd5b50356001600160a01b03166107f5565b61016c6004803603604081101561025657600080fd5b506001600160a01b03813581169160200135166108a5565b61016c6004803603602081101561028457600080fd5b50356001600160a01b0316610999565b61016c610a60565b610133610b02565b61016c600480360360408110156102ba57600080fd5b50803590602001356001600160a01b0316610b11565b610133610c08565b61016c600480360360408110156102ee57600080fd5b50803590602001356001600160a01b0316610c2c565b61016c6004803603602081101561031a57600080fd5b50356001600160a01b0316610cfb565b61016c6004803603602081101561034057600080fd5b50356001600160a01b0316610dc2565b6101336004803603604081101561036657600080fd5b50803590602001356001600160a01b0316610eba565b3360009081526001602052604081205460ff16806103b2575061039d610b02565b6001600160a01b0316336001600160a01b0316145b6103fc576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316631a5e5bc584846040518363ffffffff1660e01b81526004018083815260200182815260200192505050602060405180830381600087803b15801561046a57600080fd5b505af115801561047e573d6000803e3d6000fd5b505050506040513d602081101561049457600080fd5b50519392505050565b6104a5610fb1565b6000546001600160a01b039081169116146104f5576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316632275a830826040518263ffffffff1660e01b815260040180828152602001915050600060405180830381600087803b15801561055b57600080fd5b505af115801561056f573d6000803e3d6000fd5b5050505050565b61057e610fb1565b6000546001600160a01b039081169116146105ce576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b6001600160a01b038116600081815260016020818152604092839020805460ff1916909217909155815192835290517fc36befb96151814c16fe0d20f29a5912794cda96453e57ab00edad0bb21d50fa9281900390910190a150565b60016020526000908152604090205460ff1681565b610647610fb1565b6000546001600160a01b03908116911614610697576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663f2fde38b826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b3360009081526001602052604090205460ff168061073c5750610727610b02565b6001600160a01b0316336001600160a01b0316145b610786576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316635b54cf96826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b6107fd610fb1565b6000546001600160a01b0390811691161461084d576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b6001600160a01b038116600081815260016020908152604091829020805460ff19169055815192835290517f998b1c8c2c4e47baeddde4d4152dfae31548fb5e6aa5fc2026808fa365a30e7c9281900390910190a150565b6108ad610fb1565b6000546001600160a01b039081169116146108fd576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316636813a3c283836040518363ffffffff1660e01b815260040180836001600160a01b03168152602001826001600160a01b0316815260200192505050600060405180830381600087803b15801561097d57600080fd5b505af1158015610991573d6000803e3d6000fd5b505050505050565b6109a1610fb1565b6000546001600160a01b039081169116146109f1576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316636daf5035826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b610a68610fb1565b6000546001600160a01b03908116911614610ab8576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b6000546001600160a01b031690565b3360009081526001602052604090205460ff1680610b475750610b32610b02565b6001600160a01b0316336001600160a01b0316145b610b91576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663964c406183836040518363ffffffff1660e01b815260040180838152602001826001600160a01b0316815260200192505050600060405180830381600087803b15801561097d57600080fd5b7f000000000000000000000000000000000000000000000000000000000000000081565b610c34610fb1565b6000546001600160a01b03908116911614610c84576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663c3242d6b83836040518363ffffffff1660e01b815260040180838152602001826001600160a01b0316815260200192505050600060405180830381600087803b15801561097d57600080fd5b610d03610fb1565b6000546001600160a01b03908116911614610d53576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663db970340826040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b15801561055b57600080fd5b610dca610fb1565b6000546001600160a01b03908116911614610e1a576040805162461bcd60e51b81526020600482018190526024820152600080516020610fdc833981519152604482015290519081900360640190fd5b6001600160a01b038116610e5f5760405162461bcd60e51b8152600401808060200182810382526026815260200180610fb66026913960400191505060405180910390fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b3360009081526001602052604081205460ff1680610ef05750610edb610b02565b6001600160a01b0316336001600160a01b0316145b610f3a576040805162461bcd60e51b815260206004820152601660248201527522a9292fa727aa2fa0a226a4a72fa7a92fa7aba722a960511b604482015290519081900360640190fd5b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663f962854284846040518363ffffffff1660e01b815260040180838152602001826001600160a01b0316815260200192505050602060405180830381600087803b15801561046a57600080fd5b339056fe4f776e61626c653a206e6577206f776e657220697320746865207a65726f20616464726573734f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572a264697066735822122075fdd08a7afcd3480b9410b65898f6d33a45c4b9e216f5cba3d23adf989afb3164736f6c634300060c0033000000000000000000000000592f70ce43a310d15ff59be1460f38ab6df3fe65",
+      "r": "0x7c21357223241028f387d47b60c8c817bf77d96074c7cf9de007dfdc5d723fff",
+      "s": "0x1312a89f8d026b5d8339b2ee4c664de44d41c49cc5d70e1720c87729305576ab",
+      "v": 310,
+      "chainId": 137
+    }
+  }
+}

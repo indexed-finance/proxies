@@ -51,10 +51,10 @@ module.exports = {
       accounts: [keys.mainnet],
       chainId: 1
     },
-    rinkeby: {
-      url: new InfuraProvider("rinkeby", process.env.INFURA_PROJECT_ID).connection.url,
-      accounts: [keys.rinkeby],
-      chainId: 4
+    polygon: {
+      url: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.POLYGON_ALCHEMY_API_KEY}`,
+      accounts: [keys.mainnet],
+      chainId: 137
     },
     coverage: {
       url: url.format({
